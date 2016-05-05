@@ -1,14 +1,21 @@
 package pl.jcommerce.moonshine;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
 import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class Thermometer {
+//@EqualsAndHashCode(callSuper=false)
+@Entity
+public class Thermometer extends BaseEntity {
 
 	@NonNull
 	private String name;
 	private TwiAddress address;
+	
+	@Transient
 	private ThermometerDriver driver;
 
 	public double getTemperature() {

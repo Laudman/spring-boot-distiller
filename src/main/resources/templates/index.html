@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"/>
+ <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"/>
+
+<script src="js/app.js"/>
+<script src="js/services.js"/>
+</head>
+<body ng-controller="ThermometerController">
+
+<form ng-submit="submit()" name="thermometerForm">
+
+		<select ng-model="thermometer.physicalAddress">
+			<option ng-required="true" ng-repeat="aaa in response" required="required">{{aaa.physicalAddress}}</option>
+		</select>
+
+
+<!-- 		<select ng-model="thermometer.physicalAddress" ng-options="response.physicalAddress as response.physicalAddress for response in response" required="required"/> -->
+		<input type="text" ng-model="thermometer.name" ng-required="true"/>
+		
+		<input type="submit" value="Add"/>
+</form>		
+<!-- 	<span> RESPONSE : {{response}}</span> -->
+		<span>{{thermometer.physicalAddress}}</span>
+	<table>
+		<tr>
+			<td><h1>Available Twi Address List:</h1></td>
+		</tr>
+		
+		<tr ng-repeat="data in response">
+			<td><span>{{data.physicalAddress}}</span></td>
+		</tr>
+	</table>
+
+
+
+
+</body>
+</html>
