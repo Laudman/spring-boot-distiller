@@ -9,11 +9,15 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @Embeddable
-@RequiredArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class TwiAddress {
 
 	@NonNull
 	private byte[] physicalAddress;
+
+	public TwiAddress(String address) {
+		physicalAddress = address.getBytes();
+	}
 
 }

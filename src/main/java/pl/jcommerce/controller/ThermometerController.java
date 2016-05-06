@@ -7,29 +7,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.jcommerce.database.ThermometerRepository;
 import pl.jcommerce.moonshine.Thermometer;
 import pl.jcommerce.moonshine.TwiAddress;
-import pl.jcommerce.moonshine.TwiFacade;
+import pl.jcommerce.moonshine.service.ThermometerService;
 
 @RestController
 @RequestMapping("/thermometer")
 public class ThermometerController {
-	
+
 	@Autowired
-	private TwiFacade facade;
-	
-	@Autowired
-	private ThermometerRepository repository;
-	
+	private ThermometerService service;
+
 	@RequestMapping("/addresses")
-	public List<TwiAddress> getAddresses() {
-		return facade.lookUp();
+	public List<TwiAddress> getTwiAddresses() {
+		return service.getTwiAddresses();
 	}
-	
+
 	@RequestMapping("/add")
 	public Thermometer save(@RequestBody Thermometer thermometer) {
-		return repository.save(thermometer);
+		return service.save(thermometer);
 	}
-	
+
+	@RequestMapping("/all")
+	public Iterable<Thermometer> all() {
+		return service.getThermometers();
+	}
+
 }

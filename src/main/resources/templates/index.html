@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-<meta charset="UTF-8"/>
-<title>Insert title here</title>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"/>
- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"/>
+<meta charset="UTF-8" />
+<title>Distiller Application</title>
 
-<script src="js/app.js"/>
-<script src="js/services.js"/>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js" />
+<script type="text/javascript"
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
+
+<script src="js/app.js" />
+<script src="js/services.js" />
+<script src="js/controllers.js" />
+
+<script>
+	document.write('<base href="' + document.location + '" />');
+</script>
+
+<link rel="stylesheet" type="text/css" href="styles.css" media="all" />
 </head>
-<body ng-controller="ThermometerController">
+<body>
 
-<form ng-submit="submit()" name="thermometerForm">
+	<div id='cssmenu'>
+		<ul ng-controller="NavCtrl">
+			<li class='active'><a href='#/home'><span>Home</span></a></li>
+			<li><a href='#/thermometers'><span>Thermometers</span></a></li>
+			<li><a href='#'><span>Settings</span></a></li>
+			<li class='last'><a href='#'><span>Description</span></a></li>
+		</ul>
+	</div>
 
-		<select ng-model="thermometer.physicalAddress">
-			<option ng-required="true" ng-repeat="aaa in response" required="required">{{aaa.physicalAddress}}</option>
-		</select>
-
-
-<!-- 		<select ng-model="thermometer.physicalAddress" ng-options="response.physicalAddress as response.physicalAddress for response in response" required="required"/> -->
-		<input type="text" ng-model="thermometer.name" ng-required="true"/>
-		
-		<input type="submit" value="Add"/>
-</form>		
-<!-- 	<span> RESPONSE : {{response}}</span> -->
-		<span>{{thermometer.physicalAddress}}</span>
-	<table>
-		<tr>
-			<td><h1>Available Twi Address List:</h1></td>
-		</tr>
-		
-		<tr ng-repeat="data in response">
-			<td><span>{{data.physicalAddress}}</span></td>
-		</tr>
-	</table>
-
-
-
-
+	<div ng-view=""></div>
 </body>
 </html>

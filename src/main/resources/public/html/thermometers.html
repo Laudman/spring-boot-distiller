@@ -1,0 +1,29 @@
+
+<table align="center" id="table" ng-controller="ThermometerController">
+
+	<tr>
+		<td><h1>Choose thermometer addres, type name, then add</h1></td>
+	</tr>
+	<tr>
+		<td>
+			<form ng-submit="submit()" name="thermometerForm">
+				<select ng-model="thermometer.address"
+					ng-options="response.physicalAddress as response.physicalAddress for response in response"
+					required="required">
+					<option value="">--------Choose--------</option>
+				</select> <input type="text" ng-model="thermometer.name" ng-required="true" />
+				<input type="submit" value="Add" />
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td><span>{{thermometer.physicalAddress}}</span></td>
+	</tr>
+	<tr>
+		<td><h1>Available Twi Address List:</h1></td>
+	</tr>
+
+	<tr ng-repeat="data in response">
+		<td><span>{{data.physicalAddress}}</span></td>
+	</tr>
+</table>

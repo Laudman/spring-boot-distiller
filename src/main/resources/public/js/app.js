@@ -1,12 +1,27 @@
-var app = angular.module("app",['app.services']);
+var app = angular.module("app",
+		[ 'ngRoute', 'app.services', 'app.controllers' ]).config(
+		function($routeProvider, $locationProvider, $httpProvider) {
 
-app.controller('ThermometerController', ['$scope', 'ThermometerFactory', function($scope, ThermometerFactory) {
-	$scope.response=ThermometerFactory.getAll();
-//	$scope.chosen = $scope.response[0];
-	$scope.submit = function() {
-		$scope.thermometerForm.$setPristine();
-		console.log($scope.thermometer);
-		$scope.thermometer={};
-	};
-}
-]);
+			var baseUrl = "html/"
+
+			$routeProvider.when('/', {
+				templateUrl : baseUrl + 'home.html',
+				controller : 'ThermometerController'
+			});
+			$routeProvider.when('/home', {
+				templateUrl : baseUrl + 'home.html',
+				controller : 'ThermometerController'
+			});
+			$routeProvider.when('/thermometers', {
+				templateUrl : baseUrl + 'thermometers.html',
+				controller : 'ThermometerController'
+			});
+			$routeProvider.when('/settings', {
+				templateUrl : 'contact.html',
+				controller : 'ContactCtrl'
+			});
+			$routeProvider.otherwise({
+				redirectTo : '/home',
+				controller : 'HomeCtrl',
+			});
+		});

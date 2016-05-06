@@ -8,8 +8,8 @@ services.factory('ThermometerFactory', function($resource) {
 		},
 		add : {
 			method : 'POST',
-			url: 'thermometer/add'
+			url : 'thermometer/add'
 		}
-	
+
 	})
 });

@@ -1,13 +1,16 @@
 package pl.jcommerce.moonshine;
 
-public class ThermometerDriverImpl implements ThermometerDriver {
-	
-	TwiAddress address;
-	double temp;
+import lombok.Data;
 
-	public ThermometerDriverImpl(TwiAddress address, double temp) {
+@Data
+public class ThermometerDriverImpl implements ThermometerDriver {
+
+	private TwiAddress address;
+	private double temperature;
+
+	public ThermometerDriverImpl(TwiAddress address, double temperature) {
 		this.address = address;
-		this.temp = temp;
+		this.temperature = temperature;
 	}
 
 	@Override
@@ -17,7 +20,7 @@ public class ThermometerDriverImpl implements ThermometerDriver {
 
 	@Override
 	public double getTemperature() {
-		return temp;
+		return temperature;
 	}
 
 }
