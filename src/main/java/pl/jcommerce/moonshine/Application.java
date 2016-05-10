@@ -1,11 +1,8 @@
-package pl.jcommerce;
+package pl.jcommerce.moonshine;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import pl.jcommerce.moonshine.TwiFacade;
-import pl.jcommerce.moonshine.TwiFacadeImpl;
 
 @SpringBootApplication
 public class Application {

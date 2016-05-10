@@ -10,7 +10,8 @@ h1 {
 	font-size: 1em;
 }
 
-#table {
+table, td, th {
+	width: 500px;
 	background-color: #F3FFBD;
 	border-collapse: collapse;
 	border: 1px solid black;

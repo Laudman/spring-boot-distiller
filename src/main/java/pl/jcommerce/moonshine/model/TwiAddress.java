@@ -1,4 +1,4 @@
-package pl.jcommerce.moonshine;
+package pl.jcommerce.moonshine.model;
 
 import javax.persistence.Embeddable;
 
@@ -14,10 +14,6 @@ import lombok.RequiredArgsConstructor;
 public class TwiAddress {
 
 	@NonNull
-	private byte[] physicalAddress;
-
-	public TwiAddress(String address) {
-		physicalAddress = address.getBytes();
-	}
+	private String physicalAddress;
 
 }

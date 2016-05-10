@@ -1,29 +1,41 @@
 
-<table align="center" id="table" ng-controller="ThermometerController">
+
+<table align="center" id="table" ng-controller="ThermometerController"
+	ng-init="init()">
 
 	<tr>
-		<td><h1>Choose thermometer addres, type name, then add</h1></td>
+		<td colspan="4"><h1>Attach termometer</h1></td>
 	</tr>
 	<tr>
-		<td>
+		<td colspan="4">
 			<form ng-submit="submit()" name="thermometerForm">
+				<input type="text" ng-model="thermometer.name" ng-required="true" />
 				<select ng-model="thermometer.address"
 					ng-options="response.physicalAddress as response.physicalAddress for response in response"
 					required="required">
 					<option value="">--------Choose--------</option>
-				</select> <input type="text" ng-model="thermometer.name" ng-required="true" />
-				<input type="submit" value="Add" />
+				</select> <input type="submit" value="Add" />
 			</form>
 		</td>
 	</tr>
+
 	<tr>
-		<td><span>{{thermometer.physicalAddress}}</span></td>
-	</tr>
-	<tr>
-		<td><h1>Available Twi Address List:</h1></td>
+		<th>ID</th>
+		<th>NAME</th>
+		<th>ADDRESS</th>
+		<th></th>
 	</tr>
 
-	<tr ng-repeat="data in response">
-		<td><span>{{data.physicalAddress}}</span></td>
+	<tr ng-repeat="t in thermometers">
+
+		<td>{{t.id}}</td>
+		<td>{{t.name}}</td>
+		<td>{{t.driver.address.physicalAddress}}</td>
+		<td><input type="button" ng-click="del(t.id)" value="Delete"></input></td>
+
+		<!--  <td>{{thermometers}}</td> -->
+
 	</tr>
 </table>
+
+

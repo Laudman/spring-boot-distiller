@@ -11,13 +11,38 @@ app.controller('ThermometerController', [
 		'$scope',
 		'ThermometerFactory',
 		'$compile',
-		function($scope, ThermometerFactory, $compile) {
-			$scope.response = ThermometerFactory.getAll();
+		'$rootScope',
+		function($scope, ThermometerFactory, $compile, $rootScope) {
+			
+			$scope.init=function() {
+				$scope.response = ThermometerFactory.getTwiAddresses();
+				$scope.thermometers= ThermometerFactory.getThermometers();
+				console.log("init")
+			};
+			
+			$rootScope.$on("updateAddresses", function() {
+				$scope.response = ThermometerFactory.getTwiAddresses();
+				$scope.thermometers= ThermometerFactory.getThermometers();
+				console.log("broadcast");
+			});
+			
+//			console.log("srodek");
+//			$scope.response = ThermometerFactory.getTwiAddresses();
+//			$scope.thermometers= ThermometerFactory.getThermometers();
 			// $scope.chosen = $scope.response[0];
+			
+			$scope.del=function(number) {
+				ThermometerFactory.del({id:number});
+				$rootScope.$broadcast("updateAddresses");
+			};
+			
 			$scope.submit = function() {
-				ThermometerFactory.add($scope.thermometer),
-						$scope.thermometerForm.$setPristine();
-				console.log($scope.thermometer);
+				console.log("submit");
+				ThermometerFactory.add($scope.thermometer);
+				$rootScope.$broadcast("updateAddresses");
+//				$scope.thermometers.push($scope.thermometer),
+				$scope.thermometerForm.$setPristine();
+//				console.log($scope.thermometer);
 				$scope.thermometer = {};
 			};
 		} ]);

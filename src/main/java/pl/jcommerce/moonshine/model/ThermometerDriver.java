@@ -1,4 +1,4 @@
-package pl.jcommerce.moonshine;
+package pl.jcommerce.moonshine.model;
 
 public interface ThermometerDriver {
 

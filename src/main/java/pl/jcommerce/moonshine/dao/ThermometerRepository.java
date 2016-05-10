@@ -1,10 +1,10 @@
-package pl.jcommerce.dao;
+package pl.jcommerce.moonshine.dao;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import pl.jcommerce.moonshine.Thermometer;
+import pl.jcommerce.moonshine.model.Thermometer;
 
 public interface ThermometerRepository extends CrudRepository<Thermometer, Long> {
 

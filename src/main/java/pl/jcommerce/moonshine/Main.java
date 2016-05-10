@@ -2,6 +2,11 @@ package pl.jcommerce.moonshine;
 
 import java.util.List;
 
+import pl.jcommerce.moonshine.model.Thermometer;
+import pl.jcommerce.moonshine.model.TwiAddress;
+import pl.jcommerce.moonshine.model.TwiFacade;
+import pl.jcommerce.moonshine.model.TwiFacadeImpl;
+
 public class Main {
 
 	public static void main(String[] args) {
