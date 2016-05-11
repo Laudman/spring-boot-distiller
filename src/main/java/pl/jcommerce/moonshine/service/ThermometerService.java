@@ -40,29 +40,14 @@ public class ThermometerService {
 	}
 
 	public List<TwiAddress> getAvailableTwiAddresses() {
-//		List<TwiAddress> availableAddresses = new ArrayList<>(facade.lookUp());
 		List<TwiAddress> availableAddresses = new ArrayList<>(facade.lookUp());
 
 		Iterable<Thermometer> thermometers = repository.findAll();
 		List<TwiAddress> usedAddresses = (ArrayList<TwiAddress>) StreamSupport.stream(thermometers.spliterator(), false)
 				.map(t -> t.getAddress()).collect(Collectors.toList());
-
-//		List<TwiAddress> 
-		
-//		List<TwiAddress> used = new ArrayList<TwiAddress>();
-
-//		for (TwiAddress u : usedAddresses) {
-//			used.add(u);
-//		}
-//		List<TwiAddress> available = new ArrayList<TwiAddress>();
-//		
-//		for (TwiAddress u : availableAddresses) {
-//			available.add(u);
-//		}
 		
 		availableAddresses.removeAll(usedAddresses);
-//		available.removeAll(used);
-//		return available;
+
 		return availableAddresses;
 		
 	}

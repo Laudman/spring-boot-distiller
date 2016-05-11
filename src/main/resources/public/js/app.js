@@ -6,22 +6,22 @@ var app = angular.module("app",
 
 			$routeProvider.when('/', {
 				templateUrl : baseUrl + 'home.html',
-				controller : 'ThermometerController'
-			});
-			$routeProvider.when('/home', {
+//				controller : 'HomeController'
+			})
+			.when('/home', {
 				templateUrl : baseUrl + 'home.html',
-				controller : 'ThermometerController'
-			});
-			$routeProvider.when('/thermometers', {
+//				controller : 'HomeController'
+			})
+			.when('/thermometers', {
 				templateUrl : baseUrl + 'thermometers.html',
 				controller : 'ThermometerController'
-			});
-			$routeProvider.when('/settings', {
+			})
+			.when('/settings', {
 				templateUrl : 'contact.html',
 				controller : 'ContactCtrl'
-			});
-			$routeProvider.otherwise({
-				redirectTo : '/home',
-				controller : 'HomeCtrl',
+			})
+			.otherwise({
+				redirectTo : '/',
+				controller : 'HomeController',
 			});
 		});
