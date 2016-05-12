@@ -39,7 +39,7 @@ public class ThermometerService {
 		repository.delete(id);
 	}
 
-	public List<TwiAddress> getAvailableTwiAddresses() {
+	public List<String> getAvailableTwiAddresses() {
 		List<TwiAddress> availableAddresses = new ArrayList<>(facade.lookUp());
 
 		Iterable<Thermometer> thermometers = repository.findAll();
@@ -48,7 +48,8 @@ public class ThermometerService {
 		
 		availableAddresses.removeAll(usedAddresses);
 
-		return availableAddresses;
+		List<String> list = availableAddresses.stream().map(TwiAddress:: getPhysicalAddressAsString).collect(Collectors.toList());
+		return list;
 		
 	}
 }

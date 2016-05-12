@@ -21,7 +21,7 @@ public class ThermometerController {
 	private ThermometerService service;
 
 	@RequestMapping("/addresses")
-	public List<TwiAddress> getTwiAddresses() {
+	public List<String> getTwiAddresses() {
 		return service.getAvailableTwiAddresses();
 	}
 
