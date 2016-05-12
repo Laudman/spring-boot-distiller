@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.jcommerce.moonshine.model.Thermometer;
-import pl.jcommerce.moonshine.model.TwiAddress;
 import pl.jcommerce.moonshine.service.ThermometerService;
 
 @RestController
@@ -19,11 +18,6 @@ public class ThermometerController {
 
 	@Autowired
 	private ThermometerService service;
-
-	@RequestMapping("/addresses")
-	public List<String> getTwiAddresses() {
-		return service.getAvailableTwiAddresses();
-	}
 
 	@RequestMapping("/add")
 	public Thermometer save(@RequestBody Thermometer thermometer) {
@@ -34,9 +28,20 @@ public class ThermometerController {
 	public void save(@PathVariable Long id) {
 		service.delete(id);
 	}
+	
+	@RequestMapping("/addresses")
+	public List<String> getTwiAddresses() {
+		return service.getAvailableTwiAddresses();
+	}
+
 	@RequestMapping("/thermometers")
 	public Iterable<Thermometer> all() {
 		return service.getThermometers();
+	}
+	
+	@RequestMapping("/temperature/{id}")
+	public double getTemperature(@PathVariable Long id) {
+		return service.getTemperatureById(id);
 	}
 
 }

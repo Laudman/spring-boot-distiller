@@ -22,14 +22,6 @@ public class ThermometerService {
 	@Autowired
 	private TwiFacade facade;
 
-	public Iterable<Thermometer> getThermometers() {
-		Iterable<Thermometer> thermometers = repository.findAll();
-		for (Thermometer thermometer : thermometers) {
-			facade.attach(thermometer);
-		}
-		return thermometers;
-	}
-
 	public Thermometer save(Thermometer thermometer) {
 		facade.attach(thermometer);
 		return repository.save(thermometer);
@@ -38,7 +30,23 @@ public class ThermometerService {
 	public void delete(Long id) {
 		repository.delete(id);
 	}
+	public Thermometer findById(Long id) {
+		return repository.findById(id);
+	}
+	public double getTemperatureById(Long id) {
+		Thermometer thermometer = repository.findById(id);
+		facade.attach(thermometer);
+		return thermometer.getTemperature();
+	}
 
+	public Iterable<Thermometer> getThermometers() {
+		Iterable<Thermometer> thermometers = repository.findAll();
+		for (Thermometer thermometer : thermometers) {
+			facade.attach(thermometer);
+		}
+		return thermometers;
+	}
+	
 	public List<String> getAvailableTwiAddresses() {
 		List<TwiAddress> availableAddresses = new ArrayList<>(facade.lookUp());
 

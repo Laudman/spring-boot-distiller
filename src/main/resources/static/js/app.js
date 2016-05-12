@@ -16,9 +16,9 @@ var app = angular.module("app",
 				templateUrl : baseUrl + 'thermometers.html',
 				controller : 'ThermometerController'
 			})
-			.when('/settings', {
-				templateUrl : 'contact.html',
-				controller : 'ContactCtrl'
+			.when('/plot', {
+				templateUrl : baseUrl + 'plot.html',
+				controller : 'PlotController'
 			})
 			.otherwise({
 				redirectTo : '/',

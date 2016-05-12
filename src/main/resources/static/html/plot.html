@@ -1,0 +1,19 @@
+<div ng-controller="PlotController" ng-init=init()>
+	<br/>
+		<table align='center'>
+			<tr ng-repeat="n in names">
+				<h1 ng-show="!names.length">Go back to "THERMOMETERS" tab, and add a thermometer first!</h1>
+				<td>{{n.name}}</td>
+				<td><input type="button" ng-click="plot(n.id)" value="Choose"></input></td>
+			</tr>
+		</table>
+	<br/>
+	
+	<div fusioncharts 
+		width="600" 
+		height="400" 
+		type="line"
+		dataSource="{{myDataSource}}">
+	</div>
+
+</div>

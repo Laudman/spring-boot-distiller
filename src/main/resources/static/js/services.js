@@ -1,6 +1,14 @@
 var services = angular.module('app.services', [ 'ngResource' ]);
 services.factory('ThermometerFactory', function($resource) {
 	return $resource('/thermometer', {}, {
+		add : {
+			method : 'POST',
+			url : 'thermometer/add'
+		},
+		del : {
+			method : 'DELETE',
+			url : 'thermometer/delete/:id'
+		},		
 		getTwiAddresses : {
 			method : 'GET',
 			url : 'thermometer/addresses',
@@ -11,14 +19,11 @@ services.factory('ThermometerFactory', function($resource) {
 			url : 'thermometer/thermometers',
 			isArray : true
 		},
-		add : {
-			method : 'POST',
-			url : 'thermometer/add'
+		getTemperature : {
+			method: 'GET',
+			url: 'thermometer/temperature/:id'
 		},
-		del : {
-			method : 'DELETE',
-			url : 'thermometer/delete/:id'
-		},
+
 
 	})
 });
