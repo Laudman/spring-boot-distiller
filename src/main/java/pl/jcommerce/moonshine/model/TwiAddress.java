@@ -1,37 +1,26 @@
 package pl.jcommerce.moonshine.model;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Lob;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
+import pl.jcommerce.moonshine.model.serializator.TwiAddressDeserializer;
+import pl.jcommerce.moonshine.model.serializator.TwiAddressSerializer;
 
 @Data
 @Embeddable
+@RequiredArgsConstructor
+@NoArgsConstructor
+@JsonDeserialize(using=TwiAddressDeserializer.class)
+@JsonSerialize(using=TwiAddressSerializer.class)
 public class TwiAddress {
 
 	@NonNull
-	@Lob
-	@Getter(onMethod = @__({ @JsonIgnore }))
-	@Setter(onMethod = @__({ @JsonProperty }))
-	private byte[] physicalAddress;
-	
-	public TwiAddress() {
-	}
-	
-	public TwiAddress(String address) {
-		physicalAddress=address.getBytes();
-	}
-	
-	public String getPhysicalAddressAsString() {
-		return new String(physicalAddress);
-	}
-	
-
+	private Byte[] physicalAddress;
 	
 }

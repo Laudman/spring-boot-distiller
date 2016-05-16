@@ -11,7 +11,7 @@
 			<form ng-submit="submit()" name="thermometerForm">
 				<input type="text" ng-model="thermometer.name" ng-required="true" />
 				<select ng-model="thermometer.address"
-					ng-options="response as response for response in response"
+					ng-options="response.physicalAddress as response.physicalAddress for response in response"
 					
 					required="required">
 					<option value="">--------Choose--------</option>
@@ -30,7 +30,7 @@
 	<tr ng-repeat="t in thermometers">
 		<td>{{t.id}}</td>
 		<td>{{t.name}}</td>
-		<td>{{t.driver.address.physicalAddressAsString}}</td>
+		<td>{{t.driver.address.physicalAddress}}</td>
 		<td><input type="button" ng-click="del(t.id)" value="Delete"></input></td>
 	</tr>
 	

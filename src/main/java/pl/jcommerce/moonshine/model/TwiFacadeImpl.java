@@ -11,11 +11,11 @@ public class TwiFacadeImpl implements TwiFacade {
 	@Override
 	public List<TwiAddress> lookUp() {
 		return Arrays.asList(
-				new TwiAddress("5433642354235404"),
-				new TwiAddress("8798456498749849"),
-				new TwiAddress("5646874894981456"),
-				new TwiAddress("7781050591980561"),
-				new TwiAddress("6547894156815616"));
+				new TwiAddress(new Byte [] {65,11,64,23,54,23,88,16}),
+				new TwiAddress(new Byte [] {00,33,44,10,0,1,75,73}),
+				new TwiAddress(new Byte [] {78,21,64,58,85,43,63,04}),
+				new TwiAddress(new Byte [] {43,33,55,24,8,23,85,02}),
+				new TwiAddress(new Byte [] {01,24,64,15,54,23,54,20}));
 	}
 
 	@Override

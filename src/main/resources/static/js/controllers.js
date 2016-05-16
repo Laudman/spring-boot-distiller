@@ -1,4 +1,4 @@
-var app = angular.module("app.controllers", ['ng-fusioncharts']);
+var app = angular.module("app.controllers", ['ng-fusioncharts', 'ngStomp']);
 
 app.controller('ThermometerController', [ '$scope', 'ThermometerFactory',
 		'$compile', '$rootScope',
@@ -16,6 +16,7 @@ app.controller('ThermometerController', [ '$scope', 'ThermometerFactory',
 			
 			$scope.submit = function() {
 				ThermometerFactory.add({}, $scope.thermometer, function(value, responseHeaders) {
+					
 					$rootScope.$broadcast("updateAddresses");
 					$scope.thermometerForm.$setPristine();
 					$scope.thermometer = {};
@@ -23,13 +24,34 @@ app.controller('ThermometerController', [ '$scope', 'ThermometerFactory',
 			},
 			$rootScope.$on("updateAddresses", function() {
 				$scope.response = ThermometerFactory.getTwiAddresses();
+				
 				$scope.thermometers = ThermometerFactory.getThermometers();
 			});;
 		} ]);
-app.controller('PlotController', ['$scope', 'ThermometerFactory',  function ($scope, ThermometerFactory) {
+
+app.controller('PlotController', function ($scope, $stomp, ThermometerFactory, $log) {
 	 
+	
+	$stomp.setDebug(function(args) {
+		$log.debug(args)
+	})
+
 	$scope.init = function() {
 		$scope.names=ThermometerFactory.getThermometers();
+		if($stomp.connect != null) {
+		$stomp.connect('/hello').then(
+				function(frame) {
+					var subscription = $stomp.subscribe('/hello', function(payload,
+							headers, res) {
+						$scope.data=payload;
+						console.log("meeeee");
+					})
+		})};
+		
+		
+		
+		
+		
 		
 		$scope.myDataSource = {
 			    chart: {
@@ -48,7 +70,7 @@ app.controller('PlotController', ['$scope', 'ThermometerFactory',  function ($sc
 	var osiem = 8;
 	$scope.plot=function(id) {
 		
-		ThermometerFactory.getTemperature({id:id});
+		ThermometerFactory.setId({id:id});
 		
 		$scope.myDataSource = {
 		    chart: {
@@ -61,33 +83,34 @@ app.controller('PlotController', ['$scope', 'ThermometerFactory',  function ($sc
 		    },
 		    data: [{
 		        label: "Jeden",
-		        value: osiem
+//		        value: parseInt($scope.data, 10)
+		        value: $scope.data
 		    }, {
 		        label: "Dwa",
-		        value: "37"
+		        value: $scope.data
 		    }, {
 		        label: "Trzy",
-		        value: "32"
+		        value: 6
 		    }, {
 		        label: "Cztery",
-		        value: "4"
+		        value: 5
 		    }, {
 		        label: "Piec",
-		        value: "26"
+		        value: 4
 		    }, {
 		        label: "Szesc",
-		        value: "36"
+		        value: 5
 		    }, {
 		        label: "Siedem",
-		        value: "12"
+		        value: 3
 		    }]
 		};
 	};
-	
+  });
 
-	
-	
-  }]);
+
+
+
 
 //
 //app.controller('IndexController', [function(){

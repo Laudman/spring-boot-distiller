@@ -19,7 +19,7 @@ services.factory('ThermometerFactory', function($resource) {
 			url : 'thermometer/thermometers',
 			isArray : true
 		},
-		getTemperature : {
+		setId : {
 			method: 'GET',
 			url: 'thermometer/temperature/:id'
 		},

@@ -28,7 +28,6 @@ public class Thermometer extends BaseEntity {
 	@Transient
 	private ThermometerDriver driver;
 
-//	@JsonIgnore
 	public double getTemperature() {
 		if (driver == null) {
 			throw new IllegalStateException("Thermometer is not attached.");

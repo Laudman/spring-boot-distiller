@@ -22,6 +22,8 @@ public class ThermometerService {
 	@Autowired
 	private TwiFacade facade;
 
+	private Thermometer choosen = new Thermometer();
+
 	public Thermometer save(Thermometer thermometer) {
 		facade.attach(thermometer);
 		return repository.save(thermometer);
@@ -33,10 +35,14 @@ public class ThermometerService {
 	public Thermometer findById(Long id) {
 		return repository.findById(id);
 	}
-	public double getTemperatureById(Long id) {
+	
+	public void setChoosenThermometer(Long id) {
 		Thermometer thermometer = repository.findById(id);
 		facade.attach(thermometer);
-		return thermometer.getTemperature();
+	}
+	public Thermometer getChoosenTermometer() {
+		facade.attach(choosen);
+		return choosen;
 	}
 
 	public Iterable<Thermometer> getThermometers() {
@@ -47,7 +53,7 @@ public class ThermometerService {
 		return thermometers;
 	}
 	
-	public List<String> getAvailableTwiAddresses() {
+	public List<TwiAddress> getAvailableTwiAddresses() {
 		List<TwiAddress> availableAddresses = new ArrayList<>(facade.lookUp());
 
 		Iterable<Thermometer> thermometers = repository.findAll();
@@ -56,8 +62,14 @@ public class ThermometerService {
 		
 		availableAddresses.removeAll(usedAddresses);
 
-		List<String> list = availableAddresses.stream().map(TwiAddress:: getPhysicalAddressAsString).collect(Collectors.toList());
-		return list;
+		return availableAddresses;
 		
-	}
+	}	
 }
+		
+
+
+	
+	
+	
+
