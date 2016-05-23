@@ -1,7 +1,9 @@
 package pl.jcommerce.moonshine.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -28,18 +30,20 @@ public class ThermometerService {
 		facade.attach(thermometer);
 		return repository.save(thermometer);
 	}
-	
+
 	public void delete(Long id) {
 		repository.delete(id);
 	}
+
 	public Thermometer findById(Long id) {
 		return repository.findById(id);
 	}
-	
+
 	public void setChoosenThermometer(Long id) {
 		Thermometer thermometer = repository.findById(id);
 		facade.attach(thermometer);
 	}
+
 	public Thermometer getChoosenTermometer() {
 		facade.attach(choosen);
 		return choosen;
@@ -52,24 +56,37 @@ public class ThermometerService {
 		}
 		return thermometers;
 	}
-	
+
 	public List<TwiAddress> getAvailableTwiAddresses() {
 		List<TwiAddress> availableAddresses = new ArrayList<>(facade.lookUp());
 
 		Iterable<Thermometer> thermometers = repository.findAll();
 		List<TwiAddress> usedAddresses = (ArrayList<TwiAddress>) StreamSupport.stream(thermometers.spliterator(), false)
 				.map(t -> t.getAddress()).collect(Collectors.toList());
-		
+
 		availableAddresses.removeAll(usedAddresses);
 
 		return availableAddresses;
+
+	}
+	
+	public List<Double> getThermometerTemperature(Thermometer thermometer) {
+		List<Double> temp = new ArrayList<Double>();
+		for(int i=0; i<=100; i++) {
+			temp.add(thermometer.getTemperature());
+		}
+		return temp;
+	}
+
+	public Map<Thermometer, List<Double>> getAllThermometersTemperature() {
+
+		Map<Thermometer, List<Double>> map = new HashMap<Thermometer, List<Double>>();
 		
-	}	
+//		Map<Thermometer, List<Double>> map2 = Collectors.toMap(t -> getThermometers(), t -> t.getThermometerTemperature());
+		
+		for(Thermometer t : getThermometers()) {
+			map.put(t, getThermometerTemperature(t));
+		}
+		return map;
+	}
 }
-		
-
-
-	
-	
-	
-

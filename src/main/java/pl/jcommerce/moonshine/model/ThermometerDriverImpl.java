@@ -7,6 +7,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 public class ThermometerDriverImpl implements ThermometerDriver {

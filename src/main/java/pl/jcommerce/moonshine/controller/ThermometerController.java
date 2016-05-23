@@ -1,6 +1,7 @@
 package pl.jcommerce.moonshine.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -46,7 +47,11 @@ public class ThermometerController {
 	public void setIdForChart(@PathVariable Long id) {
 		service.setChoosenThermometer(id);
 	}
-	
+    
+    @RequestMapping("/temperatures")
+    public Map<Thermometer, List<Double>> getAllThermometersTemperature() {
+    	return service.getAllThermometersTemperature();
+    }
 	
 	
 

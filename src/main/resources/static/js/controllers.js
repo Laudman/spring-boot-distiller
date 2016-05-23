@@ -48,17 +48,14 @@ app.controller('PlotController', function ($scope, $stomp, ThermometerFactory, $
 					})
 		})};
 		
-		
-		
-		
-		
-		
 		$scope.myDataSource = {
 			    chart: {
 			        caption: "Chose thermometer to generate chart",
 			        numberSuffix: "\xB0",
 			        xAxisName: "Time",
 			        yAxisName: "Temperature",
+			        refreshinterval: "2",
+			        labeldisplay: "rotate"
 			    },
 			    data: [{
 			        label: "",
@@ -79,7 +76,8 @@ app.controller('PlotController', function ($scope, $stomp, ThermometerFactory, $
 		        showValues: "1",
 		        xAxisName: "Time",
 		        yAxisName: "Temperature",
-		        theme: "ocean",
+		        refreshinterval: "2",
+		        labeldisplay: "rotate"
 		    },
 		    data: [{
 		        label: "Jeden",
