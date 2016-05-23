@@ -18,6 +18,10 @@ var app = angular.module("app",
 				templateUrl : baseUrl + 'plot.html',
 				controller : 'PlotController'
 			})
+			.when('/description', {
+				templateUrl: baseUrl + 'description.html',
+				controller : 'DescriptionController'
+			})
 			.otherwise({
 				redirectTo : '/',
 				controller : 'HomeController',

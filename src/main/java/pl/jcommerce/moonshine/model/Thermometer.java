@@ -34,4 +34,7 @@ public class Thermometer extends BaseEntity {
 		}
 		return driver.getTemperature();
 	}
+	public double generateTemperature() {
+		return driver.generateTemperature();
+	}
 }

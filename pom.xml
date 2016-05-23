@@ -68,7 +68,12 @@
 			<version>19.0</version>
 		</dependency>
 
-
+		<!-- JSON IMPL -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.0.4</version>
+		</dependency>
 	</dependencies>
 
 	<properties>

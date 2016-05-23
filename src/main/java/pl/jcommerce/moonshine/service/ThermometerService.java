@@ -65,7 +65,6 @@ public class ThermometerService {
 				.map(t -> t.getAddress()).collect(Collectors.toList());
 
 		availableAddresses.removeAll(usedAddresses);
-
 		return availableAddresses;
 
 	}
@@ -73,19 +72,19 @@ public class ThermometerService {
 	public List<Double> getThermometerTemperature(Thermometer thermometer) {
 		List<Double> temp = new ArrayList<Double>();
 		for(int i=0; i<=100; i++) {
-			temp.add(thermometer.getTemperature());
+			temp.add(thermometer.generateTemperature());
 		}
 		return temp;
 	}
 
-	public Map<Thermometer, List<Double>> getAllThermometersTemperature() {
+	public Map<String, List<Double>> getAllThermometersTemperature() {
 
-		Map<Thermometer, List<Double>> map = new HashMap<Thermometer, List<Double>>();
+		Map<String, List<Double>> map = new HashMap<String, List<Double>>();
 		
 //		Map<Thermometer, List<Double>> map2 = Collectors.toMap(t -> getThermometers(), t -> t.getThermometerTemperature());
 		
 		for(Thermometer t : getThermometers()) {
-			map.put(t, getThermometerTemperature(t));
+			map.put(t.getName(), getThermometerTemperature(t));
 		}
 		return map;
 	}

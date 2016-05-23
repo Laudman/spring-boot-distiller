@@ -5,5 +5,7 @@ public interface ThermometerDriver {
 	TwiAddress getAddress();
 
 	double getTemperature();
+	
+	double generateTemperature();
 
 }

@@ -26,33 +26,36 @@ public class ThermometerController {
 	public Thermometer save(@RequestBody Thermometer thermometer) {
 		return service.save(thermometer);
 	}
-	
-	@RequestMapping(value= "/delete/{id}", method=RequestMethod.DELETE)
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public void save(@PathVariable Long id) {
 		service.delete(id);
 	}
-	
+
 	@RequestMapping("/addresses")
 	public List<TwiAddress> getTwiAddresses() {
 		return service.getAvailableTwiAddresses();
 	}
-	
+
 	@RequestMapping("/thermometers")
 	public Iterable<Thermometer> all() {
 		return service.getThermometers();
 	}
 
-    @SendTo("/hello")
+//	@SendTo("/hello")
 	@RequestMapping("/temperature/{id}")
 	public void setIdForChart(@PathVariable Long id) {
 		service.setChoosenThermometer(id);
 	}
-    
-    @RequestMapping("/temperatures")
-    public Map<Thermometer, List<Double>> getAllThermometersTemperature() {
-    	return service.getAllThermometersTemperature();
-    }
-	
-	
+	//////////////////
+	@RequestMapping("/temperatures")
+	public Map<String, List<Double>> getAllThermometersTemperature() {
+		return service.getAllThermometersTemperature();
+	}
+//	//////////////////
+//	@RequestMapping("/aaa")
+//	public String aaa() {
+//		return "&label=02:15:59&value=55";
+//	}
 
 }

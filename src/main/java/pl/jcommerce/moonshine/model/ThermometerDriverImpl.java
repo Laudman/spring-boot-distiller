@@ -32,5 +32,9 @@ public class ThermometerDriverImpl implements ThermometerDriver {
 	public double getTemperature() {
 		return temperature;
 	}
+	@Override
+	public double generateTemperature(){
+		return randomizer.nextDouble()*20+25;
+	}
 
 }

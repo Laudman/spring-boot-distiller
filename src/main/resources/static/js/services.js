@@ -23,7 +23,10 @@ services.factory('ThermometerFactory', function($resource) {
 			method: 'GET',
 			url: 'thermometer/temperature/:id'
 		},
-
-
+		getTemperature : {
+			method: 'GET',
+			url: 'thermometer/temperatures',
+			isArray : true
+		}
 	})
 });
