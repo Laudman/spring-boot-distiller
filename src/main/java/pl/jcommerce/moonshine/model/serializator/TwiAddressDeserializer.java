@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import pl.jcommerce.moonshine.model.TwiAddress;
+import pl.jcommerce.moonshine.model.thermometer.TwiAddress;
 
 public class TwiAddressDeserializer extends JsonDeserializer<TwiAddress> {
 

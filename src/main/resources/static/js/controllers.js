@@ -125,15 +125,16 @@ app.controller('PlotController', function($scope, $stomp, ThermometerFactory,
 app.controller('DescriptionController', function($scope, $stomp,
 		ThermometerFactory, $log) {
 
-	 $stomp.setDebug(function(args) {
-	 $log.debug(args)
-	 })
+//	 $stomp.setDebug(function(args) {
+//	 $log.debug(args)
+//	 })
 	
 	$scope.thermometers = ThermometerFactory.getThermometers();
 	
 	$scope.init = function() {
-		if ($stomp.connect != null) {
-
+		
+		if ($stomp.sock == null) {
+			
 			$stomp.connect('/hello').then(function(frame) {
 				$stomp.subscribe('/hello', function(payload, headers, res) {
 					fusioncharts.setData(payload.value,payload.time);
@@ -170,8 +171,11 @@ app.controller('DescriptionController', function($scope, $stomp,
 					"chartleftmargin" : "10",
 					"basefontcolor" : "00dd00",
 					"showrealtimevalue" : "0",
-					"datastreamurl" : "http://localhost:8080/thermometer/aaa",
-					"refreshinterval" : "5",
+//					"dataurl" : "http://localhost:8080/thermometer/aaa",
+//					"datastreamurl" : "http://localhost:8080/hello",
+//					"refreshinterval" : "15",
+//					"updateinterval" : "5",
+//					"dataStamp" : "",
 					"numbersuffix" : "%",
 					"labeldisplay" : "rotate",
 					"slantlabels" : "1",
@@ -200,15 +204,36 @@ app.controller('DescriptionController', function($scope, $stomp,
 						"value" : "0"
 					} ]
 				} ]
+//				,
+//				data:[{
+//				       label: "Bakersfield Central",
+//				       value: "880000"
+//				   },
+//				   {
+//				       label: "Garden Groove harbour",
+//				       value: "730000"
+//				   },
+//				   {
+//				       label: "Los Angeles Topanga",
+//				       value: "590000"
+//				   },
+//				   {
+//				       label: "Compton-Rancho Dom",
+//				       value: "520000"
+//				   },
+//				   {
+//				       label: "Daly City Serramonte",
+//				       value: "330000"
+//				   }]
+
 			}
 
 		})
 		fusioncharts.render();
 	});
 
-	$scope.show = function() {
-		console.log($scope.choosen.id);
-		$scope.init();
+	$scope.show = function(id) {
+		ThermometerFactory.setId({id : id });
 	};
 });
 //

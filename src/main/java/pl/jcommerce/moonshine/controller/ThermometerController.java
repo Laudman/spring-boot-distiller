@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.jcommerce.moonshine.model.Thermometer;
-import pl.jcommerce.moonshine.model.TwiAddress;
+import pl.jcommerce.moonshine.model.measurement.Measurement;
+import pl.jcommerce.moonshine.model.thermometer.Thermometer;
+import pl.jcommerce.moonshine.model.thermometer.TwiAddress;
 import pl.jcommerce.moonshine.service.ThermometerService;
 
 @RestController
@@ -43,19 +43,19 @@ public class ThermometerController {
 	}
 
 //	@SendTo("/hello")
-	@RequestMapping("/temperature/{id}")
-	public void setIdForChart(@PathVariable Long id) {
-		service.setChoosenThermometer(id);
-	}
-	//////////////////
-	@RequestMapping("/temperatures")
-	public Map<String, List<Double>> getAllThermometersTemperature() {
-		return service.getAllThermometersTemperature();
-	}
-//	//////////////////
-//	@RequestMapping("/aaa")
-//	public String aaa() {
-//		return "&label=02:15:59&value=55";
+//	@RequestMapping("/temperature/{id}")
+//	public void setIdForChart(@PathVariable Long id) {
+//		service.setChoosenThermometer(id);
 //	}
+	//////////////////
+//	@RequestMapping("/temperatures")
+//	public Map<Thermometer, List<Measurement>> getAllThermometersTemperature() {
+//		return service.getAllThermometersTemperature();
+//	}
+	//////////////////
+	@RequestMapping("/aaa")
+	public String aaa() {
+		return "&label=02:15:59&value=55";
+	}
 
 }

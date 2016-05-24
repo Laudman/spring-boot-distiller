@@ -16,7 +16,7 @@ import org.springframework.messaging.simp.broker.BrokerAvailabilityEvent;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import pl.jcommerce.moonshine.model.Thermometer;
+import pl.jcommerce.moonshine.model.thermometer.Thermometer;
 
 @Component
 public class ThermometerTemperatureDataGenerator implements ApplicationListener<BrokerAvailabilityEvent> {
@@ -35,16 +35,22 @@ public class ThermometerTemperatureDataGenerator implements ApplicationListener<
 	public void onApplicationEvent(final BrokerAvailabilityEvent event) {
 	}
 
-	@Scheduled(fixedDelay = 1000)
-	public void sendDataUpdates() {
-
-		Thermometer thermometer = service.getChoosenTermometer();
-
-		String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss", Locale.US));
-		String temp = new DecimalFormat("##.##").format(thermometer.getTemperature());
-
-		String message = Json.createObjectBuilder().add("time", time).add("value", temp).build().toString();
-
-		this.messagingTemplate.convertAndSend("/hello", message);
-	}
+//	@Scheduled(fixedDelay=1000)
+//	public void sendDataUpdates() {
+//
+//		Thermometer thermometer = service.getChoosenTermometer();
+//
+//		String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss", Locale.US));
+//		String temp;
+//		
+//		try {
+//			temp = new DecimalFormat("##.##").format(thermometer.getTemperature());
+//		} catch(Exception e) {
+//			temp = "";
+//			
+//		}
+//		String message = Json.createObjectBuilder().add("time", time).add("value", temp).build().toString();
+//		
+//		this.messagingTemplate.convertAndSend("/hello", message);
+//	}
 }

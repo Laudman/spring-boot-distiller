@@ -10,7 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import pl.jcommerce.moonshine.model.TwiAddress;
+import pl.jcommerce.moonshine.model.thermometer.TwiAddress;
 
 public class TwiAddressSerializer extends JsonSerializer<TwiAddress> {
 

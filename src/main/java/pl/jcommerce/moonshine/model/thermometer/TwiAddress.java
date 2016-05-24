@@ -1,4 +1,4 @@
-package pl.jcommerce.moonshine.model;
+package pl.jcommerce.moonshine.model.thermometer;
 
 import javax.persistence.Embeddable;
 

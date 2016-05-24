@@ -1,4 +1,4 @@
-package pl.jcommerce.moonshine.model;
+package pl.jcommerce.moonshine.model.thermometer;
 
 import javax.persistence.Entity;
 import javax.persistence.Transient;
@@ -34,7 +34,5 @@ public class Thermometer extends BaseEntity {
 		}
 		return driver.getTemperature();
 	}
-	public double generateTemperature() {
-		return driver.generateTemperature();
-	}
+
 }
