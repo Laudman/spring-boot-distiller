@@ -36,22 +36,28 @@ public class ThermometerService {
 		return thermometerRepository.save(thermometer);
 	}
 
+	public Thermometer getById(Long id) {
+		Thermometer thermometer = thermometerRepository.findById(id);
+		facade.attach(thermometer);
+		return thermometer;
+	}
 	// public void collectTemperature(Thermometer thermometer) {
 	// measureRepository.save(entities);
 	// }
 
 	public void delete(Long id) {
-//		deleteTemperatureFromDatabase(id);
-		thermometerRepository.delete(id);		
+		Thermometer thermometer = getById(id);
+		thermometer.setDeleted(true);
+		save(thermometer);
 	}
-	
-//	public void deleteTemperatureFromDatabase(Long id) {
-//		
-//	}
 
-//	public Thermometer findById(Long id) {
-//		return thermometerRepository.findById(id);
-//	}
+	// public void deleteTemperatureFromDatabase(Long id) {
+	//
+	// }
+
+	// public Thermometer findById(Long id) {
+	// return thermometerRepository.findById(id);
+	// }
 
 	public Iterable<Thermometer> findAll() {
 		List<Thermometer> thermometers = new ArrayList<Thermometer>();
@@ -64,7 +70,7 @@ public class ThermometerService {
 
 	public Iterable<Thermometer> findAllNotDeleted() {
 		List<Thermometer> thermometers = new ArrayList<Thermometer>();
-		for (Thermometer thermometer : thermometerRepository.findAll()) {
+		for (Thermometer thermometer : findAll()) {
 			if (!thermometer.isDeleted()) {
 				facade.attach(thermometer);
 				thermometers.add(thermometer);
@@ -73,35 +79,38 @@ public class ThermometerService {
 		return thermometers;
 	}
 
-//	public void setChoosenThermometer(Long id) {
-//		Thermometer thermometer = thermometerRepository.findById(id);
-//		facade.attach(thermometer);
-//		choosen = thermometer;
-//	}
-//
-//	public Thermometer getChoosenTermometer() {
-//		facade.attach(choosen);
-//		return choosen;
-//	}
+	// public void setChoosenThermometer(Long id) {
+	// Thermometer thermometer = thermometerRepository.findById(id);
+	// facade.attach(thermometer);
+	// choosen = thermometer;
+	// }
+	//
+	// public Thermometer getChoosenTermometer() {
+	// facade.attach(choosen);
+	// return choosen;
+	// }
 
-	public Iterable<Thermometer> getThermometers() {
-		Iterable<Thermometer> thermometers = thermometerRepository.findAll();
-		for (Thermometer thermometer : thermometers) {
-			facade.attach(thermometer);
-		}
-		return thermometers;
+	// public Iterable<Thermometer> getThermometers() {
+	// Iterable<Thermometer> thermometers = thermometerRepository.findAll();
+	// for (Thermometer thermometer : thermometers) {
+	// facade.attach(thermometer);
+	// }
+	// return thermometers;
+	// }
+	public List<TwiAddress> getAllTwiAddresses() {
+		return new ArrayList<>(facade.lookUp());
 	}
 
 	public List<TwiAddress> getAvailableTwiAddresses() {
 		List<TwiAddress> availableAddresses = new ArrayList<>(facade.lookUp());
 
 		Iterable<Thermometer> thermometers = thermometerRepository.findAll();
+		
 		List<TwiAddress> usedAddresses = (ArrayList<TwiAddress>) StreamSupport.stream(thermometers.spliterator(), false)
-				.map(t -> t.getAddress()).collect(Collectors.toList());
+				.filter(t -> t.isDeleted() == false).map(t -> t.getAddress()).collect(Collectors.toList());
 
 		availableAddresses.removeAll(usedAddresses);
 		return availableAddresses;
-
 	}
 
 	// http://stackoverflow.com/questions/27952472/serialize-deserialize-java-8-java-time-with-jackson-json-mapper

@@ -33,13 +33,21 @@ public class ThermometerController {
 	}
 
 	@RequestMapping("/addresses")
-	public List<TwiAddress> getTwiAddresses() {
+	public List<TwiAddress> findAllTwiAddresses() {
+		return service.getAllTwiAddresses();
+	}
+	@RequestMapping("/available")
+	public List<TwiAddress> findAvailableTwiAddresses() {
 		return service.getAvailableTwiAddresses();
 	}
 
-	@RequestMapping("/thermometers")
-	public Iterable<Thermometer> all() {
-		return service.getThermometers();
+	@RequestMapping("/allthermometers")
+	public Iterable<Thermometer> findAll() {
+		return service.findAll();
+	}
+	@RequestMapping("/availablethermometers")
+	public Iterable<Thermometer> findAllNotDeleted() {
+		return service.findAllNotDeleted();
 	}
 
 //	@SendTo("/hello")
