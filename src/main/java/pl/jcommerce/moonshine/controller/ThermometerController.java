@@ -1,7 +1,6 @@
 package pl.jcommerce.moonshine.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.jcommerce.moonshine.model.measurement.Measurement;
-import pl.jcommerce.moonshine.model.thermometer.Thermometer;
-import pl.jcommerce.moonshine.model.thermometer.TwiAddress;
+import pl.jcommerce.moonshine.model.Thermometer;
+import pl.jcommerce.moonshine.model.TwiAddress;
 import pl.jcommerce.moonshine.service.ThermometerService;
 
+/**
+ * Designed for thermometers CRUD operations
+ * 
+ * @author wipo
+ *
+ */
 @RestController
 @RequestMapping("/thermometer")
 public class ThermometerController {
@@ -22,48 +26,47 @@ public class ThermometerController {
 	@Autowired
 	private ThermometerService service;
 
+	/**
+	 * Saves given thermometer to database
+	 * 
+	 * @param Thermometer
+	 *            to save
+	 * @return Thermometer saved
+	 */
 	@RequestMapping("/add")
 	public Thermometer save(@RequestBody Thermometer thermometer) {
 		return service.save(thermometer);
 	}
 
+	/**
+	 * Delete the specified thermometer
+	 * 
+	 * @param id
+	 *            of thermometer
+	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public void save(@PathVariable Long id) {
 		service.delete(id);
 	}
 
-	@RequestMapping("/addresses")
-	public List<TwiAddress> findAllTwiAddresses() {
-		return service.getAllTwiAddresses();
-	}
-	@RequestMapping("/available")
-	public List<TwiAddress> findAvailableTwiAddresses() {
-		return service.getAvailableTwiAddresses();
-	}
-
-	@RequestMapping("/allthermometers")
+	/**
+	 * Returns available logical thermometers
+	 * 
+	 * @return Thermometer iterable collection
+	 */
+	@RequestMapping("/thermometers")
 	public Iterable<Thermometer> findAll() {
-		return service.findAll();
-	}
-	@RequestMapping("/availablethermometers")
-	public Iterable<Thermometer> findAllNotDeleted() {
-		return service.findAllNotDeleted();
+		return service.findAllThermometers();
 	}
 
-//	@SendTo("/hello")
-//	@RequestMapping("/temperature/{id}")
-//	public void setIdForChart(@PathVariable Long id) {
-//		service.setChoosenThermometer(id);
-//	}
-	//////////////////
-//	@RequestMapping("/temperatures")
-//	public Map<Thermometer, List<Measurement>> getAllThermometersTemperature() {
-//		return service.getAllThermometersTemperature();
-//	}
-	//////////////////
-	@RequestMapping("/aaa")
-	public String aaa() {
-		return "&label=02:15:59&value=55";
+	/**
+	 * Returns available TwiAddresses
+	 * 
+	 * @return TwiAddress available list
+	 */
+	@RequestMapping("/addresses")
+	public List<TwiAddress> findAvailableTwiAddresses() {
+		return service.findAvailableTwiAddresses();
 	}
 
 }

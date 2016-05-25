@@ -1,4 +1,4 @@
-package pl.jcommerce.moonshine.model.serializator;
+package pl.jcommerce.moonshine.controller.serializator;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -10,10 +10,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import pl.jcommerce.moonshine.model.thermometer.TwiAddress;
+import pl.jcommerce.moonshine.model.TwiAddress;
 
 public class TwiAddressSerializer extends JsonSerializer<TwiAddress> {
-
+	/**
+	 * This method serializes {@code TwiAddress} to JSON data and
+	 * 
+	 * @param TwiAddress 
+	 */
 	@Override
 	public void serialize(TwiAddress value, JsonGenerator gen, SerializerProvider serializers)
 			throws IOException, JsonProcessingException {

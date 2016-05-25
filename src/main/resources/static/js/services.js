@@ -11,12 +11,12 @@ services.factory('ThermometerFactory', function($resource) {
 		},		
 		getTwiAddresses : {
 			method : 'GET',
-			url : 'thermometer/available',
+			url : 'thermometer/addresses',
 			isArray : true
 		},
 		getThermometers : {
 			method : 'GET',
-			url : 'thermometer/availablethermometers',
+			url : 'thermometer/thermometers',
 			isArray : true
 		},
 		setId : {
