@@ -36,8 +36,8 @@ public class ThermometerService {
 	private TwiFacade facade;
 
 	/**
-	 * Attaches a thermometer to a physical slot. then saves logical thermometer
-	 * to database.
+	 * Attaches a thermometer to a physical device. then saves logical
+	 * thermometer to database.
 	 * 
 	 * @param thermometer
 	 * @return saved entity
@@ -62,22 +62,21 @@ public class ThermometerService {
 	}
 
 	/**
-	 * This method changes {@link Thermometer#setDeleted(true)} field to
-	 * <i>true</i> , next saves it back to database.
-	 * 
+	 * This method disconnects logical thermometer from physical address bus
+	 * making it unaccessible for <i>findAllThermometers</i> method,
+	 * but still can be obtained by <i>getById</i> method
 	 * @param id
 	 */
 	@Transactional
 	public void delete(Long id) {
 		Thermometer thermometer = getById(id);
 		thermometer.setDeleted(true);
-		setDeletedForMeasurement(thermometer);
 		save(thermometer);
 	}
 
 	/**
-	 * Returns all thermometer entities which {@link Thermometer#isDeleted()}
-	 * field is false, attaches them to physical slot, and returns it.
+	 * Returns all thermometer entities which <i>deleted</i>
+	 * field is false, attaches them to physical device, and returns it.
 	 * 
 	 * @return list of attached, available thermometers
 	 */
@@ -88,8 +87,9 @@ public class ThermometerService {
 	}
 
 	/**
-	 * Returns all available TwiAddress objects which weren't already used to
-	 * attach for logical thermometers.
+	 * Returns all available TwiAddresses which weren't already used to
+	 * attach for logical thermometers, and are still available to connect 
+	 * them with logical thermometer.
 	 * 
 	 * @return list of physical thermometers addresses
 	 */
@@ -112,18 +112,5 @@ public class ThermometerService {
 		for (Thermometer termometer : thermometers) {
 			measurementRepository.save(new Measurement(LocalTime.now(), termometer.getTemperature(), termometer));
 		}
-	}
-
-	/**
-	 * Disables temperature measurement for given thermometer. This
-	 * method is invoked when {@link #delete(Long)} method is used.
-	 * 
-	 * @param thermometer
-	 */
-	@Transactional
-	public void setDeletedForMeasurement(Thermometer thermometer) {
-		List<Measurement> measurements = measurementRepository.findByThermometer(thermometer);
-		measurements.stream().forEach(m -> m.setDeleted(true));
-		measurementRepository.save(measurements);
 	}
 }

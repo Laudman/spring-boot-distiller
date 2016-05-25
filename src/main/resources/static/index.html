@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<meta charset="UTF-8" />
+<title>Distiller Application</title>
+
+<!-- FUSIONCHARTS -->
+<script src="js/fusioncharts/fusioncharts.js"></script>
+<script src="js/fusioncharts/fusioncharts.charts.js"></script>
+<!-- ANGULARJS -->
+<script src="js/angular/angular.js"></script>
+<script src="js/angular/angular-resource.js"></script>
+<script src="js/angular/angular-route.js"></script>
+<script src="js/angular/angular-fusioncharts.js"></script>
+<!-- WEBSOCKET -->
+<script src="js/websocket/ng-stomp.js"></script>
+<script src="js/websocket/sockjs.min.js"></script>
+<script src="js/websocket/stomp.min.js"></script>
+
+<!-- OWN -->
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="styles/styles.css"
+	media="all" />
+<link rel="stylesheet" type="text/css" href="styles/angular-chart.css" />
+</head>
+<body>
+
+	<div id='cssmenu'>
+		<!-- 	<ul ng-controller="NavCtrl"> -->
+		<ul class='active'>
+			<li><a href='#/home'><span>Home</span></a></li>
+			<li><a href='#/thermometers'><span>Thermometers</span></a></li>
+			<li><a href='#/plot2'><span>Plot</span></a></li>
+			<li class='last'><a href='#/description'><span>Description</span></a></li>
+		</ul>
+	</div>
+
+	<div ng-view=""></div>
+</body>
+</html>

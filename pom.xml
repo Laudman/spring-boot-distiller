@@ -55,11 +55,6 @@
 			<version>1.16.8</version>
 		</dependency>
 
-		<!-- THYMLEAF -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
 
 		<!-- GOOGLE GUAVA -->
 		<dependency>

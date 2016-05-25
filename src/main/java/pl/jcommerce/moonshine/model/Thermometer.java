@@ -15,8 +15,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 /**
- * Entity which is a representation of logical thermometer. In
- * relation with Measurement class.
+ * Entity which is a representation of logical thermometer. In relation with
+ * Measurement class.
  * 
  * @author wipo
  * @see Measurement
@@ -39,9 +39,9 @@ public class Thermometer extends BaseEntity {
 	private ThermometerDriver driver;
 
 	/**
-	 * Returns random temperature between 20-45*
-	 * @return double
-	 * 			temperature
+	 * Returns temperature
+	 * 
+	 * @return double temperature
 	 */
 	public double getTemperature() {
 		if (driver == null) {

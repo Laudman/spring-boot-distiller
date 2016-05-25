@@ -17,6 +17,11 @@ import pl.jcommerce.moonshine.model.Thermometer;
  *
  */
 public interface MeasurementRepository extends CrudRepository<Measurement, Long> {
-
+	/**
+	 * Return list of measurements for given thermometer
+	 * 
+	 * @param thermometer
+	 * @return list of measurements for given thermometer
+	 */
 	List<Measurement> findByThermometer(Thermometer thermometer);
 }

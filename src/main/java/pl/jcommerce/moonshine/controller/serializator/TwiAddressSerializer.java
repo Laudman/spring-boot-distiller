@@ -12,13 +12,13 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import pl.jcommerce.moonshine.model.TwiAddress;
 
+/**
+ * Used for serialization {@code TwiAddress} when obtained from view.
+ * 
+ * @return TwiAddress
+ */
 public class TwiAddressSerializer extends JsonSerializer<TwiAddress> {
-	/**
-	 * This method serializes {@code TwiAddress} to JSON data and
-	 * 
-	 * @param TwiAddress 
-	 */
-	@Override
+
 	public void serialize(TwiAddress value, JsonGenerator gen, SerializerProvider serializers)
 			throws IOException, JsonProcessingException {
 
@@ -30,11 +30,6 @@ public class TwiAddressSerializer extends JsonSerializer<TwiAddress> {
 				.collect(Collectors.joining(":"));
 
 		gen.writeString(serialized);
-
-		// gen.writeString
-
-		// gen.writeString(Base64.encodeBase64String(value.getPhysicalAddress()));
-
 		gen.writeEndObject();
 
 	}

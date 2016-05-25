@@ -14,7 +14,7 @@ import pl.jcommerce.moonshine.model.TwiAddress;
 import pl.jcommerce.moonshine.service.ThermometerService;
 
 /**
- * Designed for thermometers CRUD operations
+ * Controller designed for thermometers CRUD operations
  * 
  * @author wipo
  *
@@ -55,7 +55,7 @@ public class ThermometerController {
 	 * @return Thermometer iterable collection
 	 */
 	@RequestMapping("/thermometers")
-	public Iterable<Thermometer> findAll() {
+	public Iterable<Thermometer> findAvailableThermometers() {
 		return service.findAllThermometers();
 	}
 

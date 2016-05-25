@@ -28,7 +28,7 @@ public class ThermometerDriverImpl implements ThermometerDriver {
 	/**
 	 * Constructs driver implementation according given TwiAddress
 	 * 
-	 * @param address
+	 * @param TwiAddress
 	 */
 	public ThermometerDriverImpl(TwiAddress address) {
 		this.address = address;

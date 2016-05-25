@@ -5,7 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * Provides a method to save measurements from thermometers to database
+ * Provides a method to save thermometers measurement to database
  * 
  * @author wipo
  *
@@ -17,7 +17,7 @@ public class ThermometerDataGenerator {
 	ThermometerService service;
 
 	/**
-	 * Records measurements from thermometers within the specified time(10s)
+	 * Records  thermometers measurement within the specified time(10s)
 	 * 
 	 * @see @Scheluded
 	 */

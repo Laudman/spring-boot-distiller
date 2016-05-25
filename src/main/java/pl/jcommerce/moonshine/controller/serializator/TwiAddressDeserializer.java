@@ -12,12 +12,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import pl.jcommerce.moonshine.model.TwiAddress;
 
+/**
+ * Used for deserialization {@code TwiAddress} when sending it to view.
+ * 
+ * @author wipo
+ */
 public class TwiAddressDeserializer extends JsonDeserializer<TwiAddress> {
-	/**
-	 * Returns deserialized {@code TwiAddress} object from {@code JsonNode} data
-	 * 
-	 * @return TwiAddress
-	 */
+
 	@Override
 	public TwiAddress deserialize(JsonParser p, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {

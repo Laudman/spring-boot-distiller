@@ -20,7 +20,11 @@ import pl.jcommerce.moonshine.model.TwiAddress;
  */
 @Component
 public class TwiFacadeImpl implements TwiFacade {
-
+	/**
+	 * Returns all physical TwiAddresses
+	 * 
+	 * @return list of physical addresses
+	 */
 	@Override
 	public List<TwiAddress> lookUp() {
 		return Arrays.asList(
@@ -31,11 +35,21 @@ public class TwiFacadeImpl implements TwiFacade {
 				new TwiAddress(new Byte[] { 01, 24, 64, 15, 54, 23, 54, 20 }));
 	}
 
+	/**
+	 * Attaches single physical address to logical ThermometerDriver
+	 * 
+	 * @param thermometer
+	 */
 	@Override
 	public void attach(Thermometer thermometer) {
 		thermometer.setDriver(new ThermometerDriverImpl(thermometer.getAddress()));
 	}
 
+	/**
+	 * Attaches all physical addresses to logical ThermometerDriver
+	 * 
+	 * @param thermometers
+	 */
 	@Override
 	public void attachAll(List<Thermometer> thermometers) {
 		for (Thermometer thermometer : thermometers) {

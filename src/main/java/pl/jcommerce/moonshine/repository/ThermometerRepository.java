@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import pl.jcommerce.moonshine.model.Measurement;
 import pl.jcommerce.moonshine.model.Thermometer;
 
 /**
@@ -18,10 +17,20 @@ import pl.jcommerce.moonshine.model.Thermometer;
  */
 public interface ThermometerRepository extends CrudRepository<Thermometer, Long> {
 
-	List<Thermometer> findByName(String name);
-
+	/**
+	 * Returns thermometer by the given id.
+	 * 
+	 * @param id
+	 * @return
+	 */
 	Thermometer findById(Long id);
 
+	/**
+	 * Returns list of thermometers where field {@link Thermometer#deleted} is
+	 * false
+	 * 
+	 * @return list of thermometers which aren't set as deleted.
+	 */
 	List<Thermometer> findAllByDeletedFalse();
 
 }
