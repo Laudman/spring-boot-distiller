@@ -5,25 +5,25 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * Provides a method to save thermometers measurement to database
+ * Provides scheluded method used to save thermometers measurement to database
  * 
  * @author wipo
  *
  */
 @Component
-public class ThermometerDataGenerator {
+public class ThermometerDataSchedule {
 
 	@Autowired
 	ThermometerService service;
 
 	/**
-	 * Records  thermometers measurement within the specified time(10s)
+	 * Repeats each 10s ThermometerService's method called generateMeasurementsThenSave();
 	 * 
 	 * @see @Scheluded
 	 */
 	@Scheduled(fixedDelay = 10000)
-	public void saveTemperature() {
-		service.collectMeasurements();
+	public void repeatGenerationAndSavingForMeasurement() {
+		service.generateMeasurementsThenSave();
 	}
 
 }

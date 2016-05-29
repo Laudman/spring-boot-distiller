@@ -63,8 +63,9 @@ public class ThermometerService {
 
 	/**
 	 * This method disconnects logical thermometer from physical address bus
-	 * making it unaccessible for <i>findAllThermometers</i> method,
-	 * but still can be obtained by <i>getById</i> method
+	 * making it unaccessible for <i>findAllThermometers</i> method, but still
+	 * can be obtained by <i>getById</i> method
+	 * 
 	 * @param id
 	 */
 	@Transactional
@@ -75,8 +76,8 @@ public class ThermometerService {
 	}
 
 	/**
-	 * Returns all thermometer entities which <i>deleted</i>
-	 * field is false, attaches them to physical device, and returns it.
+	 * Returns all thermometer entities which <i>deleted</i> field is false,
+	 * attaches them to physical device, and returns it.
 	 * 
 	 * @return list of attached, available thermometers
 	 */
@@ -87,9 +88,8 @@ public class ThermometerService {
 	}
 
 	/**
-	 * Returns all available TwiAddresses which weren't already used to
-	 * attach for logical thermometers, and are still available to connect 
-	 * them with logical thermometer.
+	 * Returns all available TwiAddresses which weren't already used, and are
+	 * still available to connect them with logical thermometers.
 	 * 
 	 * @return list of physical thermometers addresses
 	 */
@@ -103,10 +103,10 @@ public class ThermometerService {
 	}
 
 	/**
-	 * Collects measurements of all available thermometers, then saves them to
-	 * database
+	 * This method random generates measurements of all available thermometers,
+	 * then saves them to database
 	 */
-	public void collectMeasurements() {
+	public void generateMeasurementsThenSave() {
 		Iterable<Thermometer> thermometers = findAllThermometers();
 
 		for (Thermometer termometer : thermometers) {
