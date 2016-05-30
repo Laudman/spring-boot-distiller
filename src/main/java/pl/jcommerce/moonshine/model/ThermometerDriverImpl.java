@@ -23,7 +23,7 @@ public class ThermometerDriverImpl implements ThermometerDriver {
 	 * serializer
 	 */
 	@JsonIgnore
-	private Random randomizer = new Random();
+	private Random randomizer;
 
 	/**
 	 * Constructs driver implementation according given TwiAddress
@@ -32,6 +32,7 @@ public class ThermometerDriverImpl implements ThermometerDriver {
 	 */
 	public ThermometerDriverImpl(TwiAddress address) {
 		this.address = address;
+		randomizer = new Random();
 	}
 
 	@Override

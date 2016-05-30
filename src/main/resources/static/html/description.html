@@ -1,14 +1,14 @@
 <div ng-controller="DescriptionController">
 	<br />
 	<form ng-submit="show(choosen)">
-		<select ng-model="choosen"
-			ng-options="thermometer.id as thermometer.name for thermometer in thermometers" required="required">
+		<select ng-model="choosen" ng-options="thermometer.id as thermometer.name for thermometer in thermometers" required="required">
 			<option value="">CHOOSE NAME</option>
 		</select>
 		<input type="submit" value="Show"></input>
-		{{choosen}}
+		<br/>
+		<br/>
 	</form>
 	<br /> <br />
-	<div id="chart-container">Choose thermometer to generate chart</div>
+	<!-- <div id="chart-container">Choose thermometer to generate chart</div> -->
 
 </div>

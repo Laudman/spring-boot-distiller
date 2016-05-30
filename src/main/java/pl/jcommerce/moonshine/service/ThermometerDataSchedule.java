@@ -1,6 +1,7 @@
 package pl.jcommerce.moonshine.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
+@EnableScheduling
 public class ThermometerDataSchedule {
 
 	@Autowired
@@ -21,7 +23,7 @@ public class ThermometerDataSchedule {
 	 * 
 	 * @see @Scheluded
 	 */
-	@Scheduled(fixedDelay = 10000)
+//	@Scheduled(fixedDelay = 10000)
 	public void repeatGenerationAndSavingForMeasurement() {
 		service.generateMeasurementsThenSave();
 	}

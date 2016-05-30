@@ -63,6 +63,13 @@
 			<version>19.0</version>
 		</dependency>
 
+		<!-- JSR310 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+
 		<!-- JSON IMPL -->
 		<dependency>
 			<groupId>org.glassfish</groupId>

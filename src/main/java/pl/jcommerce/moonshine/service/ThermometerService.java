@@ -2,7 +2,9 @@ package pl.jcommerce.moonshine.service;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -113,4 +115,30 @@ public class ThermometerService {
 			measurementRepository.save(new Measurement(LocalTime.now(), termometer.getTemperature(), termometer));
 		}
 	}
+
+	/**
+	 * Returns measurements list for given thermometer
+	 * 
+	 * @param thermometer
+	 * @return measurements list
+	 */
+	private List<Measurement> getMeasurementsFor(Thermometer thermometer) {
+		return new ArrayList<>(measurementRepository.findByThermometer(thermometer));
+	}
+
+	/**
+	 * Collects measurements for attached thermometers
+	 * 
+	 * @return map with thermometer key and measurements as value
+	 */
+	public Map<String, List<Measurement>> getMeasurementsForAttachedThermometers() {
+
+		Map<String, List<Measurement>> measurements = new HashMap<String, List<Measurement>>();
+
+		for (Thermometer thermometer : findAllThermometers()) {
+			measurements.put(thermometer.getName(), getMeasurementsFor(thermometer));
+		}
+		return measurements;
+	}
+
 }

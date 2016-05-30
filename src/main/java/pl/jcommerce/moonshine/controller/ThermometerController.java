@@ -1,6 +1,7 @@
 package pl.jcommerce.moonshine.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.jcommerce.moonshine.model.Measurement;
 import pl.jcommerce.moonshine.model.Thermometer;
 import pl.jcommerce.moonshine.model.TwiAddress;
 import pl.jcommerce.moonshine.service.ThermometerService;
@@ -67,6 +69,14 @@ public class ThermometerController {
 	@RequestMapping("/addresses")
 	public List<TwiAddress> findAvailableTwiAddresses() {
 		return service.findAvailableTwiAddresses();
+	}
+	/**
+	 * Returns measurements for attached thermometers
+	 * @return
+	 */
+	@RequestMapping("/measurements")
+	public Map<String, List<Measurement>> getMeasurementsForAttachedThermometers() {
+		return service.getMeasurementsForAttachedThermometers();
 	}
 
 }

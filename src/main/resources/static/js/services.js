@@ -8,7 +8,7 @@ services.factory('ThermometerFactory', function($resource) {
 		del : {
 			method : 'DELETE',
 			url : 'thermometer/delete/:id'
-		},		
+		},
 		getTwiAddresses : {
 			method : 'GET',
 			url : 'thermometer/addresses',
@@ -20,12 +20,17 @@ services.factory('ThermometerFactory', function($resource) {
 			isArray : true
 		},
 		setId : {
-			method: 'GET',
-			url: 'thermometer/temperature/:id'
+			method : 'GET',
+			url : 'thermometer/temperature/:id'
+		},
+		getMeasurements : {
+			method : 'GET',
+			url : 'thermometer/measurements',
+
 		},
 		getTemperature : {
-			method: 'GET',
-			url: 'thermometer/temperatures',
+			method : 'GET',
+			url : 'thermometer/temperatures',
 			isArray : true
 		}
 	})
