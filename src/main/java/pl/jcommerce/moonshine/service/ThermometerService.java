@@ -1,6 +1,8 @@
 package pl.jcommerce.moonshine.service;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -112,18 +114,8 @@ public class ThermometerService {
 		Iterable<Thermometer> thermometers = findAllThermometers();
 
 		for (Thermometer termometer : thermometers) {
-			measurementRepository.save(new Measurement(LocalTime.now(), termometer.getTemperature(), termometer));
+			measurementRepository.save(new Measurement(LocalDateTime.now(), termometer.getTemperature(), termometer));
 		}
-	}
-
-	/**
-	 * Returns measurements list for given thermometer
-	 * 
-	 * @param thermometer
-	 * @return measurements list
-	 */
-	private List<Measurement> getMeasurementsFor(Thermometer thermometer) {
-		return new ArrayList<>(measurementRepository.findByThermometer(thermometer));
 	}
 
 	/**
@@ -139,6 +131,20 @@ public class ThermometerService {
 			measurements.put(thermometer.getName(), getMeasurementsFor(thermometer));
 		}
 		return measurements;
+	}
+
+	/**
+	 * Returns measurements list for given thermometer
+	 * 
+	 * @param thermometer
+	 * @return measurements list
+	 */
+	private List<Measurement> getMeasurementsFor(Thermometer thermometer) {
+		return new ArrayList<>(measurementRepository.findByThermometer(thermometer));
+	}
+
+	public Iterable<Measurement> aaa() {
+		return measurementRepository.findAll();
 	}
 
 }

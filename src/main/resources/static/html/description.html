@@ -1,14 +1,6 @@
-<div ng-controller="DescriptionController">
-	<br />
-	<form ng-submit="show(choosen)">
-		<select ng-model="choosen" ng-options="thermometer.id as thermometer.name for thermometer in thermometers" required="required">
-			<option value="">CHOOSE NAME</option>
-		</select>
-		<input type="submit" value="Show"></input>
-		<br/>
-		<br/>
-	</form>
-	<br /> <br />
-	<!-- <div id="chart-container">Choose thermometer to generate chart</div> -->
+<div ng-controller="LineCtrl">
 
+
+<canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" 
+    chart-legend="true" chart-series="series" chart-click="onClick"></canvas> 
 </div>

@@ -19,11 +19,12 @@ public class ThermometerDataSchedule {
 	ThermometerService service;
 
 	/**
-	 * Repeats each 10s ThermometerService's method called generateMeasurementsThenSave();
+	 * Repeats each 10s ThermometerService's method called
+	 * generateMeasurementsThenSave();
 	 * 
 	 * @see @Scheluded
 	 */
-//	@Scheduled(fixedDelay = 10000)
+//	@Scheduled(fixedDelay = 1000)
 	public void repeatGenerationAndSavingForMeasurement() {
 		service.generateMeasurementsThenSave();
 	}

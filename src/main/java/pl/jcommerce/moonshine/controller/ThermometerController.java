@@ -78,5 +78,9 @@ public class ThermometerController {
 	public Map<String, List<Measurement>> getMeasurementsForAttachedThermometers() {
 		return service.getMeasurementsForAttachedThermometers();
 	}
+	@RequestMapping("/test")
+	public Iterable<Measurement> aaa() {
+		return service.aaa();
+	}
 
 }

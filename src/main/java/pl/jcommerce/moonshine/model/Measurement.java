@@ -1,6 +1,6 @@
 package pl.jcommerce.moonshine.model;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Measurement extends BaseEntity {
 
-	private LocalTime time;
+	private LocalDateTime time;
 	private Double value;
 	@ManyToOne
 	@JoinColumn

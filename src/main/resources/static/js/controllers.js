@@ -1,4 +1,14 @@
-var app = angular.module("app.controllers", [ 'ng-fusioncharts', 'ngStomp' ]);
+var app = angular.module("app.controllers", [ 'chart.js']).config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts
+    ChartJsProvider.setOptions({
+      colours: ['#FF5252', '#FF8A80'],
+      responsive: false
+    });
+    // Configure all line charts
+    ChartJsProvider.setOptions('Line', {
+      datasetFill: false
+    });
+  }]);
 
 app.controller('ThermometerController', [
 		'$scope',
@@ -39,6 +49,53 @@ app.controller('ThermometerController', [
 app.controller('PlotController', function($scope, $stomp, ThermometerFactory,
 		$log) {
 
+	$scope.names = ThermometerFactory.getThermometers();
+
+	$scope.init = function() {
+		if ($stomp.sock == null) {
+		}
+		$stomp.connect('/hello').then(function(frame) {
+			$stomp.subscribe('/hello', function(payload, headers, res) {
+				fusioncharts.setData(payload.value, payload.time);
+			})
+		})
+	};
+
+	ThermometerFactory.getMeasurements(function(response) {
+		delete response.$promise;
+		delete response.$resolved;
+		angular.forEach(response, function(measurementList, thermometer) {
+
+			angular.forEach(measurementList, function(measurement, key) {
+			});
+		});
+	});
+
+});
+
+
+app.controller("LineCtrl", function ($scope) {
+	  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+	  $scope.series = ['Series A', 'Series B'];
+	  $scope.data = [
+	                 [65, 59, 80, 81, 56, 55, 40],
+	                 [28, 48, 40, 19, 86, 27, 90]
+	               ];
+	  $scope.onClick = function (points, evt) {
+	    console.log(points, evt);
+	  };
+	});
+
+
+
+
+
+
+
+
+app.controller('DescriptionController', function($scope, $stomp,
+		ThermometerFactory, $log) {
+
 	// $stomp.setDebug(function(args) {
 	// $log.debug(args)
 	// })
@@ -65,205 +122,5 @@ app.controller('PlotController', function($scope, $stomp, ThermometerFactory,
 	// console.log(value);
 	// });
 	//
-	// $scope.myDataSource = {
-	// chart : {
-	// caption : "Chose thermometer to generate chart",
-	// numberSuffix : "\xB0",
-	// xAxisName : "Time",
-	// yAxisName : "Temperature",
-	// },
-	// data : [ {
-	// label : "",
-	// value : ""
-	// } ]
-	// };
-	// }
-	//
-	// var osiem = 8;
-	// $scope.plot = function(id) {
-	//
-	// ThermometerFactory.setId({
-	// id : id
-	// });
-	//
-	// $scope.myDataSource = {
-	// chart : {
-	// caption : "Temperature chart",
-	// numberSuffix : "\xB0",
-	// showValues : "1",
-	// xAxisName : "Time",
-	// yAxisName : "Temperature",
-	// theme : "ocean",
-	// },
-	// data : [ {
-	// label : "Jeden",
-	// // value: parseInt($scope.data, 10)
-	// value : $scope.data
-	// }, {
-	// label : "Dwa",
-	// value : $scope.data
-	// }, {
-	// label : "Trzy",
-	// value : 6
-	// }, {
-	// label : "Cztery",
-	// value : 5
-	// }, {
-	// label : "Piec",
-	// value : 4
-	// }, {
-	// label : "Szesc",
-	// value : 5
-	// }, {
-	// label : "Siedem",
-	// value : 3
-	// } ]
-	// };
-	// };
+
 });
-
-app.controller('DescriptionController', function($scope, $stomp,
-		ThermometerFactory, $log, $resource, $q) {
-
-//	$stomp.setDebug(function(args) {
-//		$log.debug(args)
-//	})
-
-	$scope.thermometers = ThermometerFactory.getThermometers();
-
-	$scope.init = function() {
-
-		if ($stomp.sock == null) {
-
-			$stomp.connect('/hello').then(function(frame) {
-				$stomp.subscribe('/hello', function(payload, headers, res) {
-					fusioncharts.setData(payload.value, payload.time);
-
-				})
-				
-
-			})
-		}
-	};
-	
-	$scope.measurement=ThermometerFactory.getMeasurements();
-	
-//	$scope.measurement.$promise.then(null, function (result) {
-////		var d = $q.defer();
-////		d.resolve(result);
-//		console.log(result);
-//	});
-	
-	
-	ThermometerFactory.getMeasurements(function(response) {
-		
-		delete response.$promise;
-		delete response.$resolved;
-		
-		angular.forEach(response, function(measurementList, thermometer) {
-			angular.forEach(measurementList, function(measurement, key) {
-				
-				console.log(measurement.value.toFixed(1));
-				console.log(measurement.time.hour +":"+ measurement.time.minute+":"+measurement.time.second);
-			});
-		});
-	});
-});
-
-// FusionCharts.ready(function() {
-// fusioncharts = new FusionCharts({
-// type : 'realtimeline',
-// renderAt : 'chart-container',
-// width : '600',
-// height : '400',
-// dataFormat : 'json',
-// dataSource : {
-// "chart" : {
-// "manageresize" : "1",
-// "bgcolor" : "000000",
-// "bgalpha" : "100",
-// "canvasborderthickness" : "1",
-// "canvasbordercolor" : "008040",
-// "canvasbgcolor" : "000000",
-// "yaxismaxvalue" : "100",
-// "decimals" : "0",
-// "numdivlines" : "9",
-// "numvdivlines" : "28",
-// "numdisplaysets" : "30",
-// "divlinecolor" : "008040",
-// "vdivlinecolor" : "008040",
-// "divlinealpha" : "100",
-// "chartleftmargin" : "10",
-// "basefontcolor" : "00dd00",
-// "showrealtimevalue" : "0",
-// // "dataurl" : "http://localhost:8080/thermometer/aaa",
-// // "datastreamurl" : "http://localhost:8080/hello",
-// // "refreshinterval" : "15",
-// // "updateinterval" : "5",
-// // "dataStamp" : "",
-// "numbersuffix" : "%",
-// "labeldisplay" : "rotate",
-// "slantlabels" : "1",
-// "tooltipbgcolor" : "000000",
-// "tooltipbordercolor" : "008040",
-// "basefontsize" : "11",
-// "showalternatehgridcolor" : "0",
-// "legendbgcolor" : "000000",
-// "legendbordercolor" : "008040",
-// "legendpadding" : "35",
-// "showlabels" : "1",
-// "showborder" : "0"
-// },
-// "categories" : [ {
-// "category" : [ {
-// "label" : "Start"
-// } ]
-// } ],
-// "dataset" : [ {
-// "color" : "ff5904",
-// "showvalues" : "0",
-// "alpha" : "100",
-// "anchoralpha" : "0",
-// "linethickness" : "2",
-// "data" : [ {
-// "value" : "0"
-// } ]
-// } ]
-// // ,
-// // data:[{
-// // label: "Bakersfield Central",
-// // value: "880000"
-// // },
-// // {
-// // label: "Garden Groove harbour",
-// // value: "730000"
-// // },
-// // {
-// // label: "Los Angeles Topanga",
-// // value: "590000"
-// // },
-// // {
-// // label: "Compton-Rancho Dom",
-// // value: "520000"
-// // },
-// // {
-// // label: "Daly City Serramonte",
-// // value: "330000"
-// // }]
-//
-// }
-//
-// })
-// fusioncharts.render();
-// });
-//
-// $scope.show = function(id) {
-// ThermometerFactory.setId({
-// id : id
-// });
-// };
-// });
-//
-// app.controller('IndexController', [function(){
-//	
-// }]);
