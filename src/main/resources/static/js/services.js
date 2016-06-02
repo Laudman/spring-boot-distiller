@@ -1,5 +1,5 @@
 var services = angular.module('app.services', [ 'ngResource' ]);
-services.factory('ThermometerFactory', function($resource) {
+services.factory('ThermometerFactory', function($resource, $rootScope) {
 	return $resource('/thermometer', {}, {
 		add : {
 			method : 'POST',
@@ -26,7 +26,9 @@ services.factory('ThermometerFactory', function($resource) {
 		getMeasurements : {
 			method : 'GET',
 			url : 'thermometer/measurements',
-
+			transformResponse: function(data, headers){
+				return {thermometers: angular.fromJson(data)};
+            }
 		},
 		getTemperature : {
 			method : 'GET',

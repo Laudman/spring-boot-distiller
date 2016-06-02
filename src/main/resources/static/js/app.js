@@ -20,7 +20,7 @@ var app = angular.module("app",
 			})
 			.when('/description', {
 				templateUrl: baseUrl + 'description.html',
-				controller : 'LineCtrl'
+				controller : 'DescriptionController'
 			})
 			.otherwise({
 				redirectTo : '/',

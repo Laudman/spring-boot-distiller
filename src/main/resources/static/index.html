@@ -13,31 +13,40 @@
 <script src="js/websocket/sockjs.min.js"></script>
 <script src="js/websocket/stomp.min.js"></script>
 <!-- CHART -->
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.js"></script>
 <script src="js/chart/angular-chart.min.js"></script>
+<script src="js/chart/Chart.Scatter.js"></script>
+
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/chalk.js"></script>
+<script src="https://www.amcharts.com/lib/3/amstock.js"></script>
 
 
 <!-- OWN -->
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
 <script src="js/controllers.js"></script>
+
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="styles/styles.css"
 	media="all" />
 <link rel="stylesheet" type="text/css" href="styles/angular-chart.css" />
+<link rel="stylesheet" type="text/css" href="styles/chart.css" />
 </head>
 <body>
 
-	<div id='cssmenu'>
-		<!-- 	<ul ng-controller="NavCtrl"> -->
-		<ul class='active'>
-			<li><a href='#/home'><span>Home</span></a></li>
-			<li><a href='#/thermometers'><span>Thermometers</span></a></li>
-			<li><a href='#/plot'><span>Plot</span></a></li>
-			<li class='last'><a href='#/description'><span>Description</span></a></li>
-		</ul>
-	</div>
 
+	<div id='cssmenu'>
+			<ul class='active'>
+				<li><a href='#/home'><span>Home</span></a></li>
+				<li><a href='#/thermometers'><span>Thermometers</span></a></li>
+				<li><a href='#/plot'><span>Plot</span></a></li>
+				<li class='last'><a href='#/description'><span>Description</span></a></li>
+			</ul>
+	</div>
 	<div ng-view=""></div>
 </body>
+
 </html>
