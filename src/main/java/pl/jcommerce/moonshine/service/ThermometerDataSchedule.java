@@ -24,7 +24,7 @@ public class ThermometerDataSchedule {
 	 * 
 	 * @see @Scheluded
 	 */
-	@Scheduled(fixedDelay = 1000)
+	@Scheduled(fixedDelay = 10000)
 	public void repeatGenerationAndSavingForMeasurement() {
 		service.generateMeasurementsThenSave();
 	}

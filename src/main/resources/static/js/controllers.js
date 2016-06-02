@@ -1,4 +1,4 @@
-var app = angular.module("app.controllers", [ 'chart.js' ])
+var app = angular.module("app.controllers", [  ])
 
 app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$compile', '$rootScope',
 		function($scope, ThermometerFactory, $compile, $rootScope) {
@@ -41,17 +41,12 @@ app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$comp
 // })
 // };
 
-app.controller("PlotController", function($scope, ThermometerFactory) {
-
-});
-
-app.controller('DescriptionController', function($scope, ThermometerFactory, $rootScope) {
-
+app.controller("PlotController", function($scope, ThermometerFactory, $rootScope) {
 	$scope.init = function() {
 
 		var chart = AmCharts.makeChart("chartdiv", {
 			"type" : "stock",
-// "theme" : "dark",
+			"theme" : "dark",
 			"categoryField" : "date",
 
 			"categoryAxesSettings" : {
@@ -62,12 +57,11 @@ app.controller('DescriptionController', function($scope, ThermometerFactory, $ro
 			"dataSets" : [],
 
 			"panels" : [ {
-				"showCategoryAxis" : false,
-				"title" : "Temperatura",
+				"showCategoryAxis" : true,
+				"title" : "Temperature",
 				"percentHeight" : 70,
 
 				"stockGraphs" : [ {
-					"color" : "#b0de09",
 					"id" : "g1",
 					"valueField" : "value",
 					"comparable" : true,
@@ -77,17 +71,24 @@ app.controller('DescriptionController', function($scope, ThermometerFactory, $ro
 				} ],
 
 				"stockLegend" : {
+
 					"periodValueTextComparing" : "[[percents.value.close]]%",
 					"periodValueTextRegular" : "[[value.close]]"
 				}
 			} ],
 
 			"chartScrollbarSettings" : {
-				"graph" : "g1"
+				"backgroundColor" : "#ebebeb",
+				"selectedBackgroundColor" : "#f96e5b",
+
+				"graph" : "",
+				"usePeriod" : "10mm",
+				"position" : "bottom"
 			},
 
 			"panelsSettings" : {
-				"recalculateToPercents" : "never"
+				"recalculateToPercents" : "never",
+				"usePrefixes": true
 			},
 
 			"chartCursorSettings" : {
@@ -105,21 +106,16 @@ app.controller('DescriptionController', function($scope, ThermometerFactory, $ro
 				"inputFieldWidth" : 150,
 				"periods" : [ {
 					"period" : "ss",
-					"count" : 1,
-					"label" : "1s"
-				}, {
-					"period" : "ss",
 					"count" : 10,
 					"label" : "10s"
 				}, {
-					"selected" : true,
 					"period" : "mm",
 					"count" : 1,
 					"label" : "1m"
 				}, {
 					"period" : "MAX",
 					"label" : "MAX"
-					
+
 				} ]
 			},
 
@@ -157,4 +153,8 @@ app.controller('DescriptionController', function($scope, ThermometerFactory, $ro
 		});
 		chart.validateData();
 	}
+});
+
+app.controller('DescriptionController', function($scope, ThermometerFactory, $rootScope) {
+
 });
