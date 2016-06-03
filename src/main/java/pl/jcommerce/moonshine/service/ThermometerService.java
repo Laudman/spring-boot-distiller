@@ -105,18 +105,6 @@ public class ThermometerService {
 	}
 
 	/**
-	 * This method random generates measurements of all available thermometers,
-	 * then saves them to database
-	 */
-	public void generateMeasurementsThenSave() {
-		Iterable<Thermometer> thermometers = findAllThermometers();
-
-		for (Thermometer termometer : thermometers) {
-			measurementRepository.save(new Measurement(LocalDateTime.now(), termometer.getTemperature(), termometer));
-		}
-	}
-
-	/**
 	 * Collects measurements for attached thermometers
 	 * 
 	 * @return map with thermometer key and measurements as value

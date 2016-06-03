@@ -1,4 +1,4 @@
-var app = angular.module("app.controllers", [])
+var app = angular.module("app.controllers", ['ngStomp'])
 
 app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$compile', '$rootScope',
 		function($scope, ThermometerFactory, $compile, $rootScope) {
@@ -41,49 +41,53 @@ app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$comp
 // })
 // };
 
-app.controller("PlotController", function($scope, ThermometerFactory, $rootScope) {
-	$scope.init = function() {
+app.controller("PlotController", function($scope, ThermometerFactory, $rootScope, $stomp) {
 
+	$scope.init = function() {
 		
+		
+		if ($stomp.sock == null) {
+			console.log("1");
+			$stomp.connect('/hello').then(function(frame) {
+				 $stomp.subscribe('/hello', function(response, headers, res) {
+					 console.log("@");
+					 
+				 });
+				
+				 
+			 });
+		};
 		
 		var chart = AmCharts.makeChart("chartdiv", {
 			"type" : "stock",
-			"theme" : "dark",
 			"categoryField" : "date",
 
 			"categoryAxesSettings" : {
 				"minPeriod" : "ss",
-				"axisColor" : "b0de09"
 			},
-
-			"dataSets" : [],
 
 			"panels" : [ {
 				"showCategoryAxis" : true,
 				"title" : "Temperature",
-				"percentHeight" : 70,
+				"percentHeight" : 60,
 
 				"stockGraphs" : [ {
 					"id" : "g1",
 					"valueField" : "value",
 					"comparable" : true,
 					"compareField" : "value",
-					"lineThickness" : 3,
-					"fillToGraph" : "comparedGraph_g1_ds2",
+					"lineThickness" : 4
 				} ],
 
 				"stockLegend" : {
-
 					"periodValueTextComparing" : "[[percents.value.close]]%",
 					"periodValueTextRegular" : "[[value.close]]"
 				}
 			} ],
 
 			"chartScrollbarSettings" : {
-				"backgroundColor" : "#ebebeb",
+				"backgroundColor" : "#3366ff",
 				"selectedBackgroundColor" : "#f96e5b",
-
-				"graph" : "",
 				"usePeriod" : "10mm",
 				"position" : "bottom"
 			},
@@ -107,13 +111,17 @@ app.controller("PlotController", function($scope, ThermometerFactory, $rootScope
 				"dateFormat" : "YYYY-MM-DD JJ:NN",
 				"inputFieldWidth" : 150,
 				"periods" : [ {
-					"period" : "ss",
-					"count" : 10,
-					"label" : "10s"
-				}, {
 					"period" : "mm",
 					"count" : 1,
 					"label" : "1m"
+				}, {
+					"period" : "mm",
+					"count" : 10,
+					"label" : "10m"
+				}, {
+					"period" : "mm",
+					"count" : 10,
+					"label" : "10m"
 				}, {
 					"period" : "MAX",
 					"label" : "MAX"
@@ -122,10 +130,13 @@ app.controller("PlotController", function($scope, ThermometerFactory, $rootScope
 			},
 
 			"dataSetSelector" : {
+				"position" : "left",
+				"selectText" : "Thermometer",
+				"color" : "black",
 				"enabled" : true
 			}
 
-		});
+		}, 1000);
 
 		ThermometerFactory.getMeasurements(function(measurementData) {
 			angular.forEach(measurementData.thermometers, function(measurementList, thermometer) {
@@ -138,7 +149,6 @@ app.controller("PlotController", function($scope, ThermometerFactory, $rootScope
 						value : measurement.value.toFixed(2)
 					});
 				});
-
 				chart.dataSets.push({
 					title : thermometer,
 					fieldMappings : [ {
