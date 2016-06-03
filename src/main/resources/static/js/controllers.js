@@ -1,4 +1,4 @@
-var app = angular.module("app.controllers", [  ])
+var app = angular.module("app.controllers", [])
 
 app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$compile', '$rootScope',
 		function($scope, ThermometerFactory, $compile, $rootScope) {
@@ -44,6 +44,8 @@ app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$comp
 app.controller("PlotController", function($scope, ThermometerFactory, $rootScope) {
 	$scope.init = function() {
 
+		
+		
 		var chart = AmCharts.makeChart("chartdiv", {
 			"type" : "stock",
 			"theme" : "dark",
@@ -88,7 +90,7 @@ app.controller("PlotController", function($scope, ThermometerFactory, $rootScope
 
 			"panelsSettings" : {
 				"recalculateToPercents" : "never",
-				"usePrefixes": true
+				"usePrefixes" : true
 			},
 
 			"chartCursorSettings" : {

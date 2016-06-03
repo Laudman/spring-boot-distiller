@@ -22,7 +22,7 @@ import pl.jcommerce.moonshine.service.ThermometerService;
  *
  */
 @RestController
-@RequestMapping("/thermometer")
+@RequestMapping("thermometer")
 public class ThermometerController {
 
 	@Autowired
@@ -74,7 +74,7 @@ public class ThermometerController {
 	 * Returns measurements for attached thermometers
 	 * @return
 	 */
-	@RequestMapping("/measurements")
+	@RequestMapping("measurements")
 	public Map<String, List<Measurement>> getMeasurementsForAttachedThermometers() {
 		return service.getMeasurementsForAttachedThermometers();
 	}
