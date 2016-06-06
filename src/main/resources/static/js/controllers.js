@@ -31,16 +31,6 @@ app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$comp
 			;
 		} ]);
 
-// $scope.init = function() {
-// if ($stomp.sock == null) {
-// }
-// $stomp.connect('/hello').then(function(frame) {
-// $stomp.subscribe('/hello', function(payload, headers, res) {
-// fusioncharts.setData(payload.value, payload.time);
-// })
-// })
-// };
-
 app.controller("PlotController", function($scope, ThermometerFactory, $rootScope, $stomp) {
 
 	$scope.init = function() {
@@ -148,31 +138,31 @@ app.controller("PlotController", function($scope, ThermometerFactory, $rootScope
 					dataProvider : chartData,
 					categoryField : "date"
 				});
-				
+
 			});
 			chart.validateData();
 		});
-		
-		
+
 		if ($stomp.sock == null) {
 			$stomp.connect('/hello').then(function(frame) {
 				$stomp.subscribe('/hello', function(measurementMap, headers, res) {
+					var i = 0;
+					angular.forEach(measurementMap, function(measurement, key) {
 
-					angular.forEach(measurementMap, function(measurement, thermometerName) {
-						
-						chart.dataProvider.push({
+						chart.dataSets[i].dataProvider.push({
 							date : measurement.time,
-							value : measurement.value.toFixed(2)
+							value : measurement.value.toFixed(2),
 						});
-						
+						i++;
+
 					});
 
 					chart.validateData();
-
 				});
 
 			});
-		};
+		}
+		;
 	}
 });
 

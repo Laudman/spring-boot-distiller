@@ -135,10 +135,10 @@ public class ThermometerService {
 	 * @return map of thermometer and its measurement
 	 */
 	public Map<String, Measurement> getLastMeasurementsForAllThermometers() {
-		
+
 		Map<String, Measurement> measurements = new HashMap<String, Measurement>();
-		
-		for(Thermometer thermometer : findAllThermometers()) {
+
+		for (Thermometer thermometer : findAllThermometers()) {
 			measurements.put(thermometer.getName(), measurementRepository.findFirst1ByThermometerOrderByIdDesc(thermometer));
 		}
 		return measurements;
