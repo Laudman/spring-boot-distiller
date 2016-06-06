@@ -1,4 +1,4 @@
-var app = angular.module("app.controllers", ['ngStomp'])
+var app = angular.module("app.controllers", [ 'ngStomp' ])
 
 app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$compile', '$rootScope',
 		function($scope, ThermometerFactory, $compile, $rootScope) {
@@ -44,20 +44,7 @@ app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$comp
 app.controller("PlotController", function($scope, ThermometerFactory, $rootScope, $stomp) {
 
 	$scope.init = function() {
-		
-		
-		if ($stomp.sock == null) {
-			console.log("1");
-			$stomp.connect('/hello').then(function(frame) {
-				 $stomp.subscribe('/hello', function(response, headers, res) {
-					 console.log("@");
-					 
-				 });
-				
-				 
-			 });
-		};
-		
+
 		var chart = AmCharts.makeChart("chartdiv", {
 			"type" : "stock",
 			"categoryField" : "date",
@@ -161,9 +148,31 @@ app.controller("PlotController", function($scope, ThermometerFactory, $rootScope
 					dataProvider : chartData,
 					categoryField : "date"
 				});
+				
 			});
+			chart.validateData();
 		});
-		chart.validateData();
+		
+		
+		if ($stomp.sock == null) {
+			$stomp.connect('/hello').then(function(frame) {
+				$stomp.subscribe('/hello', function(measurementMap, headers, res) {
+
+					angular.forEach(measurementMap, function(measurement, thermometerName) {
+						
+						chart.dataProvider.push({
+							date : measurement.time,
+							value : measurement.value.toFixed(2)
+						});
+						
+					});
+
+					chart.validateData();
+
+				});
+
+			});
+		};
 	}
 });
 

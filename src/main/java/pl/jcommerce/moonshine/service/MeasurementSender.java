@@ -1,11 +1,5 @@
 package pl.jcommerce.moonshine.service;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.messaging.core.MessageSendingOperations;
@@ -13,19 +7,20 @@ import org.springframework.messaging.simp.broker.BrokerAvailabilityEvent;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import pl.jcommerce.moonshine.model.Measurement;
-import pl.jcommerce.moonshine.repository.MeasurementRepository;
+/**
+ * Provides method for real-time chart update
+ * 
+ * @author wipo
+ *
+ */
 
 @Component
 public class MeasurementSender implements ApplicationListener<BrokerAvailabilityEvent> {
 
 	private final MessageSendingOperations<String> messagingTemplate;
 
-	@PersistenceContext
-	private EntityManager em;
-
 	@Autowired
-	private MeasurementRepository repository;
+	private ThermometerService service;
 
 	@Autowired
 	public MeasurementSender(final MessageSendingOperations<String> messagingTemplate) {
@@ -36,9 +31,12 @@ public class MeasurementSender implements ApplicationListener<BrokerAvailability
 	public void onApplicationEvent(final BrokerAvailabilityEvent event) {
 	}
 
-	@Scheduled(fixedDelay = 1000)
-	public void sendDataUpdates() {
-
-//		this.messagingTemplate.convertAndSend("/hello", message);
+	/**
+	 * Each 10s sends to websocket subscribers map with thermometer key and it's
+	 * last measurement. Used to update real-time chart.
+	 */
+	@Scheduled(fixedDelay = 10000)
+	public void sendLastMeasurementsForAllThermometers() {
+		this.messagingTemplate.convertAndSend("/hello", service.getLastMeasurementsForAllThermometers());
 	}
 }

@@ -70,17 +70,14 @@ public class ThermometerController {
 	public List<TwiAddress> findAvailableTwiAddresses() {
 		return service.findAvailableTwiAddresses();
 	}
+
 	/**
 	 * Returns measurements for attached thermometers
+	 * 
 	 * @return
 	 */
 	@RequestMapping("measurements")
 	public Map<String, List<Measurement>> getMeasurementsForAttachedThermometers() {
 		return service.getMeasurementsForAttachedThermometers();
 	}
-	@RequestMapping("/test")
-	public Iterable<Measurement> aaa() {
-		return service.aaa();
-	}
-
 }
