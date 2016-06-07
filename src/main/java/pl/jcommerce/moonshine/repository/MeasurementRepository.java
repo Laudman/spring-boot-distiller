@@ -2,6 +2,7 @@ package pl.jcommerce.moonshine.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import pl.jcommerce.moonshine.model.Measurement;
@@ -32,6 +33,7 @@ public interface MeasurementRepository extends CrudRepository<Measurement, Long>
 	 * @param thermometer
 	 * @return last measurement for given thermometer
 	 */
-	Measurement findFirst1ByThermometerOrderByIdDesc(Thermometer thermometer);
+	@Query("SELECT m FROM Measurement m WHERE m.id IN (SELECT MAX(m2.id) from Measurement m2 GROUP BY m2.thermometer))")
+	List<Measurement> findLatestMeasurementForAllThermometers();
 
 }

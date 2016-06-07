@@ -16,6 +16,8 @@ target
 # Eclipse Core
 .project
 
+lombok.jar
+
 # External tool builders
 .externalToolBuilders/
 

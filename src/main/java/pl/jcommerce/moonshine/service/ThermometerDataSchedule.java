@@ -23,7 +23,7 @@ public class ThermometerDataSchedule {
 
 	@Autowired
 	private MeasurementRepository measurementRepository;
-	
+
 	@Autowired
 	private ThermometerService service;
 
@@ -36,11 +36,11 @@ public class ThermometerDataSchedule {
 	@Scheduled(fixedDelay = 10000)
 	public void repeatGenerationForMeasurement() {
 		Iterable<Thermometer> thermometers = service.findAllThermometers();
-		
+
 		for (Thermometer termometer : thermometers) {
 			measurementRepository.save(new Measurement(LocalDateTime.now(), termometer.getTemperature(), termometer));
 		}
-		
+
 	}
 
 }
