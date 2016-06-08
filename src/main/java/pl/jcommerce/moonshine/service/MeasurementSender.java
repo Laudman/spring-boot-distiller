@@ -37,8 +37,8 @@ public class MeasurementSender implements ApplicationListener<BrokerAvailability
 	 * Each 10s sends to websocket subscribers map with thermometer key and it's
 	 * last measurement. Used to update real-time chart.
 	 */
-	@Scheduled(fixedDelay = 1000)
-	public void sendLastMeasurementsForAllThermometers() {
+	@Scheduled(fixedDelay = 10000)
+	public void sendLastMeasurementsForAllThermometers() {		
 		this.messagingTemplate.convertAndSend("/hello", measurementRepository.findLatestMeasurementForAllThermometers());
 	}
 }

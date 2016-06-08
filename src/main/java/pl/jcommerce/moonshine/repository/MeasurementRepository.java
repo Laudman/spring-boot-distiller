@@ -27,13 +27,13 @@ public interface MeasurementRepository extends CrudRepository<Measurement, Long>
 	List<Measurement> findByThermometer(Thermometer thermometer);
 
 	/**
-	 * This method returns last row for given thermometer. Used to real-time
+	 * This method returns last measurement for available thermometers. Used to real-time
 	 * chart update
 	 * 
 	 * @param thermometer
 	 * @return last measurement for given thermometer
 	 */
-	@Query("SELECT m FROM Measurement m WHERE m.id IN (SELECT MAX(m2.id) from Measurement m2 GROUP BY m2.thermometer))")
+	@Query("SELECT m FROM Measurement m WHERE m.time IN (SELECT MAX(m2.time) from Measurement m2 GROUP BY m2.thermometer HAVING m2.thermometer IN (SELECT t.id FROM Thermometer t WHERE t.deleted=false))")
 	List<Measurement> findLatestMeasurementForAllThermometers();
 
 }
