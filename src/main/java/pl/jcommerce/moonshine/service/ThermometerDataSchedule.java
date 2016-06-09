@@ -1,6 +1,7 @@
 package pl.jcommerce.moonshine.service;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -33,12 +34,15 @@ public class ThermometerDataSchedule {
 	 * 
 	 * @see @Scheluded
 	 */
-	@Scheduled(fixedDelay = 10000)
+	@Scheduled(fixedDelay = 1000)
 	public void repeatGenerationForMeasurement() {
 		Iterable<Thermometer> thermometers = service.findAllThermometers();
 
+		Random random = new Random();
 		for (Thermometer termometer : thermometers) {
-			measurementRepository.save(new Measurement(LocalDateTime.now(), termometer.getTemperature(), termometer));
+			if(random.nextDouble() < 0.5){
+				measurementRepository.save(new Measurement(LocalDateTime.now(), termometer.getTemperature(), termometer));
+			}
 		}
 
 	}

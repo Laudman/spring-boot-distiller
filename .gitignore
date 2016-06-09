@@ -16,7 +16,11 @@ target
 # Eclipse Core
 .project
 
-lombok.jar
+#lombok
+.jar
+
+#todo
+todo.txt
 
 # External tool builders
 .externalToolBuilders/
