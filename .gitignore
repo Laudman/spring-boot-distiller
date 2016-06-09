@@ -17,7 +17,7 @@ target
 .project
 
 #lombok
-.jar
+lombok.jar
 
 #todo
 todo.txt
