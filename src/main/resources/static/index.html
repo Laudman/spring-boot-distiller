@@ -22,22 +22,27 @@
 <script src="js/services.js"></script>
 <script src="js/controllers.js"></script>
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="styles/styles.css"
-	media="all" />
+<link rel="stylesheet" type="text/css" href="styles/styles.css" media="all" />
 <link rel="stylesheet" type="text/css" href="styles/angular-chart.css" />
 <link rel="stylesheet" type="text/css" href="styles/chart.css" />
 </head>
+
 <body>
 
+	<ul class="navigation">
+		<li class="nav-item"><a href='#/chart' onclick="toogleCheckbox()"><span>Chart</span></a></li>
+		<li class="nav-item"><a href='#/configuration' onclick="toogleCheckbox()"><span>Configuration</span></a></li>
+	</ul>
 
-	<div id='cssmenu'>
-			<ul class='active'>
-				<li><a href='#/chart'><span>Chart</span></a></li>
-				<li><a href='#/configuration'><span>Configuration</span></a></li>
-				<li class='last'><a href='#/none'><span>UNDEFINED</span></a></li>
-			</ul>
-	</div>
-	<div ng-view=""></div>
+	<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+	<label for="nav-trigger"></label>
+	<div class="site-wrap" ng-view=""></div>
+
+
 </body>
-
+<script>
+	function toogleCheckbox() {
+		onclick = document.getElementById("nav-trigger").checked = false;
+	}
+</script>
 </html>

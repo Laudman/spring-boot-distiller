@@ -62,7 +62,7 @@ app.controller("ChartController", function($scope, ThermometerFactory, $stomp) {
 		var stockPanel = new AmCharts.StockPanel();
 		stockPanel.showCategoryAxis = true;
 		stockPanel.title = "Temperature Chart";
-		stockPanel.percentHeight = 60;
+		stockPanel.percentHeight = 100;
 
 		chart.panels = [ stockPanel ];
 
@@ -147,6 +147,7 @@ app.controller("ChartController", function($scope, ThermometerFactory, $stomp) {
 
 app.controller('ConfigurationController', [ '$scope', 'ThermometerFactory', '$compile', '$rootScope',
 		function($scope, ThermometerFactory, $compile, $rootScope) {
+
 
 			$scope.init = function() {
 				$rootScope.$broadcast("updateAddresses");

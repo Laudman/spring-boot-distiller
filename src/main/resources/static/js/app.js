@@ -5,8 +5,8 @@ var app = angular.module("app",
 			var baseUrl = "html/"
 
 			$routeProvider.when('/', {
-				templateUrl : baseUrl + 'chart.html',
-				controller : 'ChartController'
+				redirectTo : '/chart',
+				controller : 'ChartController'					
 			})
 			.when('/chart', {
 				templateUrl : baseUrl + 'chart.html',
