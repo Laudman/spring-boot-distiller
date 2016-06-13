@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.messaging.simp.broker.BrokerAvailabilityEvent;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,7 @@ import pl.jcommerce.moonshine.repository.MeasurementRepository;
  */
 
 @Component
+@EnableScheduling
 public class MeasurementSender implements ApplicationListener<BrokerAvailabilityEvent> {
 
 	private final MessageSendingOperations<String> messagingTemplate;

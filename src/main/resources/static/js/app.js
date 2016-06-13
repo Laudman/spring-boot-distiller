@@ -5,25 +5,19 @@ var app = angular.module("app",
 			var baseUrl = "html/"
 
 			$routeProvider.when('/', {
-				templateUrl : baseUrl + 'home.html',
+				templateUrl : baseUrl + 'chart.html',
+				controller : 'ChartController'
 			})
-			.when('/home', {
-				templateUrl : baseUrl + 'home.html',
+			.when('/chart', {
+				templateUrl : baseUrl + 'chart.html',
+				controller : 'ChartController'
 			})
-			.when('/thermometers', {
-				templateUrl : baseUrl + 'thermometers.html',
-				controller : 'ThermometerController'
-			})
-			.when('/plot', {
-				templateUrl : baseUrl + 'plot.html',
-				controller : 'PlotController'
-			})
-			.when('/description', {
-				templateUrl: baseUrl + 'description.html',
-				controller : 'DescriptionController'
+			.when('/configuration', {
+				templateUrl : baseUrl + 'configuration.html',
+				controller : 'ConfigurationController'
 			})
 			.otherwise({
 				redirectTo : '/',
-				controller : 'HomeController',
+				controller : 'ChartController',
 			});
 		});

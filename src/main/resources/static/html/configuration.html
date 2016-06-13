@@ -17,14 +17,12 @@
 	</tr>
 
 	<tr>
-		<th>ID</th>
 		<th>NAME</th>
 		<th>ADDRESS</th>
 		<th></th>
 	</tr>
 
 	<tr ng-repeat="t in thermometers">
-		<td>{{t.id}}</td>
 		<td>{{t.name}}</td>
 		<td>{{t.driver.address.physicalAddress}}</td>
 		<td><input type="button" ng-click="del(t.id)" value="Delete"></input></td>

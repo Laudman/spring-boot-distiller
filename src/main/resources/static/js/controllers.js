@@ -1,40 +1,7 @@
 var app = angular.module("app.controllers", [ 'ngStomp' ])
 
-app.controller('ThermometerController', [ '$scope', 'ThermometerFactory', '$compile', '$rootScope',
-		function($scope, ThermometerFactory, $compile, $rootScope) {
+app.controller("ChartController", function($scope, ThermometerFactory, $stomp) {
 
-			$scope.init = function() {
-				$rootScope.$broadcast("updateAddresses");
-			},
-
-			$scope.del = function(number) {
-				ThermometerFactory.del({
-					id : number
-				}, function(value, responseHeaders) {
-					$rootScope.$broadcast("updateAddresses");
-				});
-			},
-
-			$scope.submit = function() {
-				ThermometerFactory.add({}, $scope.thermometer, function(value, responseHeaders) {
-
-					$rootScope.$broadcast("updateAddresses");
-					$scope.thermometerForm.$setPristine();
-					$scope.thermometer = {};
-				});
-			}
-			$rootScope.$on("updateAddresses", function() {
-				$scope.response = ThermometerFactory.getTwiAddresses();
-				$scope.thermometers = ThermometerFactory.getThermometers();
-			});
-			;
-		} ]);
-
-app.controller("PlotController", function($scope, ThermometerFactory, $stomp, $log) {
-
-	 $stomp.setDebug(function (args) {
-	 $log.debug(args)
-	 })
 	var chart = new AmCharts.AmStockChart();
 	var stompSubscription;
 	var dataSets = [];
@@ -50,13 +17,15 @@ app.controller("PlotController", function($scope, ThermometerFactory, $stomp, $l
 	}
 
 	function prepareChartData() {
-
+		var comparable = false;
 		angular.forEach(measurementData, function(measurementList, thermometer) {
 			var measurementForThermometer = [];
 			if (measurementList.length == 0) {
+				var date = new Date();
+				date.setHours(date.getHours() + 2);
 				measurementForThermometer.push({
-					date : new Date(),
-					value : 40.1
+					date : date,
+					value : 1.0
 				});
 			}
 
@@ -75,14 +44,18 @@ app.controller("PlotController", function($scope, ThermometerFactory, $stomp, $l
 			} ];
 			dataSet.categoryField = "date";
 			dataSet.title = thermometer;
+			if (comparable) {
+				dataSet.compared = true;
+			}
 			dataSets.push(dataSet);
+			comparable = true;
 		});
 		generateChart();
 	}
 
 	function generateChart() {
 		AmCharts.useUTC = true;
-		
+
 		chart.glueToTheEnd = true;
 		chart.dataSets = [];
 		chart.dataSets = dataSets;
@@ -103,7 +76,6 @@ app.controller("PlotController", function($scope, ThermometerFactory, $stomp, $l
 		chart.panelsSettings = panelsSettings;
 
 		var graph = new AmCharts.StockGraph();
-		graph.valueField = "value";
 		graph.valueField = "value";
 		graph.comparable = true;
 		graph.compareField = "value";
@@ -146,18 +118,10 @@ app.controller("PlotController", function($scope, ThermometerFactory, $stomp, $l
 		} ];
 		chart.periodSelector = periodSelector;
 
-		var dataSetSelector = new AmCharts.DataSetSelector();
-		dataSetSelector.position = "left";
-		dataSetSelector.selectText = "Thermometer";
-		dataSetSelector.color = "black";
-		dataSetSelector.enabled = true;
-
-		chart.dataSetSelector = dataSetSelector;
-
 		chart.write("chartdiv");
 
 	}
-	
+
 	function appendMeasurement(measurementMap) {
 
 		angular.forEach(measurementMap, function(measurement, key) {
@@ -169,18 +133,47 @@ app.controller("PlotController", function($scope, ThermometerFactory, $stomp, $l
 
 		chart.validateData();
 	}
-	
+
 	$stomp.connect('/hello').then(function(frame) {
 		stompSubscription = $stomp.subscribe('/hello', function(measurementMap, headers, res) {
 			appendMeasurement(measurementMap);
 		});
 	});
-	
+
 	$scope.$on("$destroy", function() {
 		stompSubscription.unsubscribe();
-		// delete chart;
 	});
 });
+
+app.controller('ConfigurationController', [ '$scope', 'ThermometerFactory', '$compile', '$rootScope',
+		function($scope, ThermometerFactory, $compile, $rootScope) {
+
+			$scope.init = function() {
+				$rootScope.$broadcast("updateAddresses");
+			},
+
+			$scope.del = function(number) {
+				ThermometerFactory.del({
+					id : number
+				}, function(value, responseHeaders) {
+					$rootScope.$broadcast("updateAddresses");
+				});
+			},
+
+			$scope.submit = function() {
+				ThermometerFactory.add({}, $scope.thermometer, function(value, responseHeaders) {
+
+					$rootScope.$broadcast("updateAddresses");
+					$scope.thermometerForm.$setPristine();
+					$scope.thermometer = {};
+				});
+			}
+			$rootScope.$on("updateAddresses", function() {
+				$scope.response = ThermometerFactory.getTwiAddresses();
+				$scope.thermometers = ThermometerFactory.getThermometers();
+			});
+			;
+		} ]);
 
 app.controller('DescriptionController', function($scope, ThermometerFactory, $rootScope) {
 
