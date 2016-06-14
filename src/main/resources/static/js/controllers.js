@@ -55,7 +55,8 @@ app.controller("ChartController", function($scope, ThermometerFactory, $stomp) {
 
 	function generateChart() {
 		AmCharts.useUTC = true;
-
+		chart.autoMarginOffset=110;
+		chart.addClassNames=true;
 		chart.glueToTheEnd = true;
 		chart.dataSets = [];
 		chart.dataSets = dataSets;
@@ -116,6 +117,7 @@ app.controller("ChartController", function($scope, ThermometerFactory, $stomp) {
 			selected : true,
 			label : "MAX"
 		} ];
+		periodSelector.inputFieldsEnabled=false;
 		chart.periodSelector = periodSelector;
 
 		chart.write("chartdiv");
