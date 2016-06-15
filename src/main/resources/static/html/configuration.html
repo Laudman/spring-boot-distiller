@@ -1,52 +1,62 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md-6">
-			<table class="table">
-				<thread>
-				<tr>
-					<th>Attach Thermometer</th>
-				</tr>
-				</thread>
-				<tbody>
-					<tr>
-						<td colspan="4">
-							<form class="" ng-submit="submit()" name="thermometerForm" id="thermometerForm">
-								<input class="thermometerName" type="text" ng-model="thermometer.name" ng-required="true"
-									placeholder="Thermometer name" /> <select ng-model="thermometer.address"
-									ng-options="response.physicalAddress as response.physicalAddress for response in response" required="required">
-									<option value="">-------TWI ADDRESS-----</option>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3"><textarea class="descriptionTextarea" placeholder="Enter thermometer description here"
-								form="thermometerForm"></textarea></td>
-					</tr>
-					<tr>
-						<td></select> <button class="btn btn-block btn-lg btn-primary" type="submit" value="Attach Thermometer" form="thermometerForm"><span
-							class="glyphicon glyphicon-plus"></span> Attach</input></td>
-
+<div class="container" ng-init="init()">
+	<div class="row ">
+		<div class="col-md-5">
+			<div class="panel-group">
+				<div class="panel panel-primary">
+					<div class="panel-heading text-center">Attach</div>
+					<div class="panel-body">
+						<form class="form-horizontal" name="thermometerForm" id="thermometerForm" ng-submit="submit()">
+							<div class="form-group">
+								<label class="col-md-3 control-label col-md-offset-1" for="thermometerInput">Thermometer: </label>
+								<div class="col-md-6 ">
+									<input class="form-control input-md" id="textinput" name="thermometerInput" type="text" placeholder="Name"
+										title="" ng-model="thermometer.name" ng-required="true">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label col-md-offset-1" for="twiAddress">Address: </label>
+								<div class="col-md-6">
+									<select class="form-control" id="twiAddress" ng-model="thermometer.address"
+										ng-options="response.physicalAddress as response.physicalAddress for response in response" required="required">
+										<option value="">Choose</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-lg btn-primary attach-thermometer-button" type="submit" value="Attach Thermometer"
+									form="thermometerForm">
+									<span class="glyphicon glyphicon-plus"></span> Attach</input>
+								</button>
+							</div>
 						</form>
-					</tr>
-				</tbody>
-
-			</table>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-6">
-			<table class="table" ng-init="init()">
 
-				<tr>
-					<th>NAME</th>
-					<th>ADDRESS</th>
-					<th>DESCRIPTION</th>
-				</tr>
-
-				<tr ng-repeat="t in thermometers">
-					<td>{{t.name}}</td>
-					<td>{{t.driver.address.physicalAddress}}</td>
-					<td></td>
-					<td><button class="btn btn-primary btn-danger" ng-click="del(t.id)"><span class="glyphicon glyphicon-trash"></span></input></td>
-				</tr>
-
-			</table>
+		<div class="col-md-6 col-md-offset-1">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">List</div>
+				<div class="panel-body">
+					<div class="row thermometerListContent vcenter" ng-repeat="t in thermometers">
+						<div class="col-md-3" title={{t.name}}>{{t.name}}</div>
+						<div class="col-md-5" title={{t.driver.address.physicalAddress}}>{{t.driver.address.physicalAddress}}</div>
+						<div class="col-md-2">
+							<span class="glyphicon glyphicon-question-sign"></span>
+						</div>
+						<div class="col-md-2">
+							<button class="btn btn-primary btn-danger" ng-click="del(t.id)">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+</div>
+<style>
+body {
+	background-color: #EEF2F5;
+}
+</style>

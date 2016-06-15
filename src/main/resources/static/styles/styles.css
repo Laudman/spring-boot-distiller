@@ -4,12 +4,56 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
-h1 {
-	color: #247BA0;
-	text-align: center;
-	font-size: 1em;
+.container {
+	padding: 20px 0px;
 }
 
+.panel-primary {
+	width: "30%";
+}
+
+.panel-default>.panel-body {
+	cursor: pointer;
+	background-color: green;
+	color: #FFFFFF;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-radius: 4px 4px 0px 0px;
+	border-bottom: 1px solid #0074BD;
+}
+
+#thermometerFormTitle {
+	text-align: center;
+	padding: 20px 0px;
+}
+
+.form-group {
+	padding: 5px 0px;
+}
+
+.attach-thermometer-button {
+	height: 50px;
+	width: 150px;
+	margin: 0px -60px;
+	position: relative;
+	top: 50%;
+	left: 50%;
+}
+
+.thermometerListContent {
+	vertical-align: middle;
+	padding: 5px 2px;
+	cursor: help;
+}
+.thermometerListContent:hover {
+	background-color: red;
+}
+
+.thermometerTableContent div {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 #cssmenu {
 	background: #f96e5b;
