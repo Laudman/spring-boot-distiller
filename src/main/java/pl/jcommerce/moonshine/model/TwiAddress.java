@@ -1,16 +1,15 @@
 package pl.jcommerce.moonshine.model;
 
-import javax.persistence.Embeddable;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import pl.jcommerce.moonshine.controller.serializator.TwiAddressDeserializer;
 import pl.jcommerce.moonshine.controller.serializator.TwiAddressSerializer;
+
+import javax.persistence.Embeddable;
 
 /**
  * Contains physical thermometer address using I2C interface. Serializable by

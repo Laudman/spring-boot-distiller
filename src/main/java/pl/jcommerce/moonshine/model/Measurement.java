@@ -1,17 +1,14 @@
 package pl.jcommerce.moonshine.model;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * Entity which contains time of measurement and its value. In relation with
@@ -27,6 +24,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(indexes = {
+		@Index(columnList = "time", name = "time_description")
+})
 public class Measurement extends BaseEntity {
 
 	private LocalDateTime time;

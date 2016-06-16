@@ -16,6 +16,9 @@ target
 # Eclipse Core
 .project
 
+#iml
+spring-boot-distiller.iml
+
 #lombok
 lombok.jar
 
@@ -30,9 +33,6 @@ todo.txt
 
 # PyDev specific (Python IDE for Eclipse)
 *.pydevproject
-
-# CDT-specific (C/C++ Development Tooling)
-.cproject
 
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
@@ -57,3 +57,20 @@ todo.txt
 
 # Code Recommenders
 .recommenders/
+
+
+## File-based project format:
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+.idea/
+*.iml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties

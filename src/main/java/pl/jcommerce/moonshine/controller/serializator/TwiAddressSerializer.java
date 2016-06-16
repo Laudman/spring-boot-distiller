@@ -1,16 +1,15 @@
 package pl.jcommerce.moonshine.controller.serializator;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
 import pl.jcommerce.moonshine.model.TwiAddress;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Used for serialization {@code TwiAddress} when obtained from view.

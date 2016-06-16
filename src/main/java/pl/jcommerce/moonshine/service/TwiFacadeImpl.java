@@ -1,13 +1,12 @@
 package pl.jcommerce.moonshine.service;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.stereotype.Component;
-
 import pl.jcommerce.moonshine.model.Thermometer;
 import pl.jcommerce.moonshine.model.ThermometerDriverImpl;
 import pl.jcommerce.moonshine.model.TwiAddress;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Implementation of TwiFacade. Provides an implementation to obtain all

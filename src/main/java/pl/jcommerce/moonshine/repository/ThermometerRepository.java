@@ -1,10 +1,9 @@
 package pl.jcommerce.moonshine.repository;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
-
 import pl.jcommerce.moonshine.model.Thermometer;
+
+import java.util.List;
 
 /**
  * Provides operations for CRUD operations of thermometers. Extends

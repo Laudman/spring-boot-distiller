@@ -1,191 +1,211 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
 
 * {
-	font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .container {
-	padding: 20px 0px;
+    padding: 20px 0px;
 }
 
-.panel-primary {
-	width: "30%";
+textarea {
+    resize: none;
 }
 
-.panel-default>.panel-body {
-	cursor: pointer;
-	background-color: green;
-	color: #FFFFFF;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	border-radius: 4px 4px 0px 0px;
-	border-bottom: 1px solid #0074BD;
+.panel-default > .panel-body {
+    cursor: pointer;
+    background-color: green;
+    color: #FFFFFF;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 4px 4px 0px 0px;
+    border-bottom: 1px solid #0074BD;
 }
 
 #thermometerFormTitle {
-	text-align: center;
-	padding: 20px 0px;
+    text-align: center;
+    padding: 20px 0px;
 }
 
 .form-group {
-	padding: 5px 0px;
+    padding: 5px 0px;
 }
 
 .attach-thermometer-button {
-	height: 50px;
-	width: 150px;
-	margin: 0px -60px;
-	position: relative;
-	top: 50%;
-	left: 50%;
+    height: 50px;
+    width: 200px;
+    padding: 0px 10px;
 }
 
-.thermometerListContent {
-	vertical-align: middle;
-	padding: 5px 2px;
-	cursor: help;
+.thermometerListRow {
+    display: flex;
+    justify-content: center;
+    padding: 5px 2px;
+    cursor: default;
+
 }
-.thermometerListContent:hover {
-	background-color: red;
+
+.thermometerListRow:hover {
+    background-color: #EEF7F5;
+}
+
+.thermometerListCol {
+    align-self: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.thermometerDescription {
+    cursor: help;
 }
 
 .thermometerTableContent div {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
 
 #cssmenu {
-	background: #f96e5b;
-	width: auto;
-	text-align: center;
+    background: #f96e5b;
+    width: auto;
+    text-align: center;
 }
 
 #cssmenu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	line-height: 1;
-	display: block;
-	zoom: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    display: block;
+    zoom: 1;
 }
 
 #cssmenu ul:after {
-	content: " ";
-	display: block;
-	font-size: 0;
-	height: 0;
-	clear: both;
-	visibility: hidden;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
 #cssmenu ul li {
-	display: inline-block;
-	padding: 0;
-	margin: 0;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
 }
 
 #cssmenu.align-right ul li {
-	float: right;
+    float: right;
 }
 
 #cssmenu.align-center ul {
-	text-align: center;
+    text-align: center;
 }
 
 #cssmenu ul li a {
-	color: #ffffff;
-	text-decoration: none;
-	display: block;
-	padding: 15px 25px;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 700;
-	text-transform: uppercase;
-	font-size: 14px;
-	position: relative;
-	-webkit-transition: color .25s;
-	-moz-transition: color .25s;
-	-ms-transition: color .25s;
-	-o-transition: color .25s;
-	transition: color .25s;
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 15px 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    position: relative;
+    -webkit-transition: color .25s;
+    -moz-transition: color .25s;
+    -ms-transition: color .25s;
+    -o-transition: color .25s;
+    transition: color .25s;
 }
 
 #cssmenu ul li a:hover {
-	color: #333333;
+    color: #333333;
 }
 
 #cssmenu ul li a:hover:before {
-	width: 100%;
+    width: 100%;
 }
 
 #cssmenu ul li a:after {
-	content: "";
-	display: block;
-	position: absolute;
-	right: -3px;
-	top: 19px;
-	height: 6px;
-	width: 6px;
-	background: #ffffff;
-	opacity: .5;
+    content: "";
+    display: block;
+    position: absolute;
+    right: -3px;
+    top: 19px;
+    height: 6px;
+    width: 6px;
+    background: #ffffff;
+    opacity: .5;
 }
 
 #cssmenu ul li a:before {
-	content: "";
-	display: block;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	height: 3px;
-	width: 0;
-	background: #333333;
-	-webkit-transition: width .25s;
-	-moz-transition: width .25s;
-	-ms-transition: width .25s;
-	-o-transition: width .25s;
-	transition: width .25s;
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    background: #333333;
+    -webkit-transition: width .25s;
+    -moz-transition: width .25s;
+    -ms-transition: width .25s;
+    -o-transition: width .25s;
+    transition: width .25s;
 }
 
-#cssmenu ul li.last>a:after, #cssmenu ul li:last-child>a:after {
-	display: none;
+#cssmenu ul li.last > a:after, #cssmenu ul li:last-child > a:after {
+    display: none;
 }
 
 #cssmenu ul li.active a {
-	color: #333333;
+    color: #333333;
 }
 
 #cssmenu ul li.active a:before {
-	width: 100%;
+    width: 100%;
 }
 
-#cssmenu.align-right li.last>a:after, #cssmenu.align-right li:last-child>a:after
-	{
-	display: block;
+#cssmenu.align-right li.last > a:after, #cssmenu.align-right li:last-child > a:after {
+    display: block;
 }
 
 #cssmenu.align-right li:first-child a:after {
-	display: none;
+    display: none;
 }
 
 @media screen and (max-width: 768px) {
-	#cssmenu ul li {
-		float: none;
-		display: block;
-	}
-	#cssmenu ul li a {
-		width: 100%;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-		border-bottom: 1px solid #fb998c;
-	}
-	#cssmenu ul li.last>a, #cssmenu ul li:last-child>a {
-		border: 0;
-	}
-	#cssmenu ul li a:after {
-		display: none;
-	}
-	#cssmenu ul li a:before {
-		display: none;
-	}
+    #cssmenu ul li {
+        float: none;
+        display: block;
+    }
+
+    #cssmenu ul li a {
+        width: 100%;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        border-bottom: 1px solid #fb998c;
+    }
+
+    #cssmenu ul li.last > a, #cssmenu ul li:last-child > a {
+        border: 0;
+    }
+
+    #cssmenu ul li a:after {
+        display: none;
+    }
+
+    #cssmenu ul li a:before {
+        display: none;
+    }
 }

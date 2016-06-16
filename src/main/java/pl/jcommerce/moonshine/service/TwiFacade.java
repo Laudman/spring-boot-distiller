@@ -1,9 +1,9 @@
 package pl.jcommerce.moonshine.service;
 
-import java.util.List;
-
 import pl.jcommerce.moonshine.model.Thermometer;
 import pl.jcommerce.moonshine.model.TwiAddress;
+
+import java.util.List;
 
 /**
  * 

@@ -7,7 +7,6 @@ import org.springframework.messaging.simp.broker.BrokerAvailabilityEvent;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import pl.jcommerce.moonshine.repository.MeasurementRepository;
 
 /**
@@ -39,8 +38,8 @@ public class MeasurementSender implements ApplicationListener<BrokerAvailability
 	 * Each 10s sends to websocket subscribers map with thermometer key and it's
 	 * last measurement. Used to update real-time chart.
 	 */
-	@Scheduled(fixedDelay = 10000)
-	public void sendLastMeasurementsForAllThermometers() {		
+	@Scheduled(initialDelay = 2000, fixedDelay = 10000)
+	public void sendLastMeasurementsForAllThermometers() {
 		this.messagingTemplate.convertAndSend("/hello", measurementRepository.findLatestMeasurementForAllThermometers());
 	}
 }

@@ -1,10 +1,9 @@
 package pl.jcommerce.moonshine.model;
 
-import java.util.Random;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
+
+import java.util.Random;
 
 /**
  * Driver for logical thermometer, its an implementation of
