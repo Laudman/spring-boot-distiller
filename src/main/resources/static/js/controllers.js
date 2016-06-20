@@ -1,4 +1,4 @@
-var app = angular.module("app.controllers", ['ngStomp'])
+var app = angular.module("app.controllers", ['ngStomp', 'ngAudio'])
 
 app.controller("ChartController", function ($scope, ThermometerFactory, $stomp, $log) {
 
@@ -148,8 +148,8 @@ app.controller("ChartController", function ($scope, ThermometerFactory, $stomp, 
         chart.validateData();
     }
 
-    $stomp.connect('/hello').then(function (frame) {
-        stompSubscription = $stomp.subscribe('/hello', function (measurementMap, headers, res) {
+    $stomp.connect('/hello').then(function () {
+        stompSubscription = $stomp.subscribe('/hello', function (measurementMap) {
             appendMeasurement(measurementMap);
         });
     });
@@ -171,7 +171,7 @@ app.controller('ConfigurationController', ['$scope', 'ThermometerFactory', '$com
 
             ThermometerFactory.del({
                 id: number
-            }, function (value, responseHeaders) {
+            }, function () {
                 $rootScope.$broadcast("updateAddresses");
             });
         };
@@ -191,10 +191,24 @@ app.controller('ConfigurationController', ['$scope', 'ThermometerFactory', '$com
 
     }]);
 
-app.controller('TimerController', function ($scope, stopwatch) {
-
+app.controller('TimerController', function ($scope, stopwatch, ngAudio, $timeout) {
     $scope.stopwatch = stopwatch.getInstance();
-    // $scope.stopwatchB = stopwatch.getInstance();
+    $scope.sound = ngAudio.load("sound/countdown.mp3");
+    $scope.showNumberPickerInput = false;
+
+    $scope.start = function () {
+        if ($scope.stopwatch.startTime == null) {
+            $scope.sound.play();
+            $timeout(function () {
+                $scope.stopwatch.start();
+            }, 2600);
+        }
+    }
+    $scope.showNumberPicker = function (show) {
+        if (show == false || ($scope.stopwatch.startTime != null && show == true )) {
+            $scope.showNumberPickerInput = show;
+        }
+    }
 
 
 });

@@ -83,6 +83,10 @@ textarea {
     font-size: 30px;
 }
 
+.dropCounterDiv {
+    padding: 30px 10px;
+}
+
 #cssmenu {
     background: #f96e5b;
     width: auto;

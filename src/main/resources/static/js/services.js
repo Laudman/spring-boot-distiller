@@ -101,6 +101,7 @@ app.service('stopwatch', function ($timeout, $filter) {
             this.stop();
             this.startTime = null;
             this.endTime = null
+            this.timer = null;
         };
     };
 
