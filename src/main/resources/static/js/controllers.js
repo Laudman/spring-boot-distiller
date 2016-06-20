@@ -191,6 +191,10 @@ app.controller('ConfigurationController', ['$scope', 'ThermometerFactory', '$com
 
     }]);
 
-app.controller('DescriptionController', function ($scope, ThermometerFactory, $rootScope) {
+app.controller('TimerController', function ($scope, stopwatch) {
+
+    $scope.stopwatch = stopwatch.getInstance();
+    // $scope.stopwatchB = stopwatch.getInstance();
+
 
 });

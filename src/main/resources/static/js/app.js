@@ -16,8 +16,13 @@ var app = angular.module("app",
                 templateUrl: baseUrl + 'configuration.html',
                 controller: 'ConfigurationController'
             })
+            .when('/timer', {
+                templateUrl: baseUrl + 'timer.html',
+                controller: 'TimerController'
+            })
             .otherwise({
                 redirectTo: '/',
                 controller: 'ChartController',
             });
     });
+

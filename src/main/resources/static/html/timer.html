@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading text-center">Timer</div>
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <div class="row">
+                                <h3>{{stopwatch.elapsedStr('mm:ss')}}</h3>
+                                </br>
+
+                                <div class="col-md-4">
+                                    <button class="btn btn-block btn-success" ng-click='stopwatch.start()'>Start
+                                    </button>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-block btn-danger" ng-click='stopwatch.stop()'>Stop</button>
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <button class="btn btn-block btn-warning" ng-click='stopwatch.reset()'
+                                    >Reset
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<style>
+    body {
+        background-color: #EEF2F5;
+    }
+</style>

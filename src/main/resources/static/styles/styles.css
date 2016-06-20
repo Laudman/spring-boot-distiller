@@ -72,6 +72,17 @@ textarea {
     float: none;
 }
 
+.timerButton {
+    width: 3424px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.timerFont {
+    font-size: 30px;
+}
+
 #cssmenu {
     background: #f96e5b;
     width: auto;
