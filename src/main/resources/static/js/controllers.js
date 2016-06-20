@@ -60,6 +60,7 @@ app.controller("ChartController", function ($scope, ThermometerFactory, $stomp, 
 
     function generateChart() {
         AmCharts.useUTC = true;
+        chart.synchronizedGrid = true;
         chart.autoMarginOffset = 110;
         chart.addClassNames = true;
         chart.glueToTheEnd = true;
@@ -69,6 +70,12 @@ app.controller("ChartController", function ($scope, ThermometerFactory, $stomp, 
         stockPanel.showCategoryAxis = true;
         stockPanel.title = "Temperature Chart";
         stockPanel.percentHeight = 100;
+
+        var axisRight = new AmCharts.ValueAxis();
+        axisRight.position = "right";
+        var axisLeft = new AmCharts.ValueAxis();
+        axisLeft.position = "left";
+        stockPanel.addValueAxis(axisRight);
 
         chart.panels = [stockPanel];
 
@@ -158,29 +165,30 @@ app.controller('ConfigurationController', ['$scope', 'ThermometerFactory', '$com
 
         $scope.init = function () {
             $rootScope.$broadcast("updateAddresses");
-        },
+        };
 
-            $scope.del = function (number) {
-                ThermometerFactory.del({
-                    id: number
-                }, function (value, responseHeaders) {
-                    $rootScope.$broadcast("updateAddresses");
-                });
-            },
+        $scope.del = function (number) {
 
-            $scope.submit = function () {
-                ThermometerFactory.add({}, $scope.thermometer, function (value, responseHeaders) {
+            ThermometerFactory.del({
+                id: number
+            }, function (value, responseHeaders) {
+                $rootScope.$broadcast("updateAddresses");
+            });
+        };
 
-                    $rootScope.$broadcast("updateAddresses");
-                    $scope.thermometerForm.$setPristine();
-                    $scope.thermometer = {};
-                });
-            }
+        $scope.submit = function () {
+            ThermometerFactory.add({}, $scope.thermometer, function (value, responseHeaders) {
+
+                $rootScope.$broadcast("updateAddresses");
+                $scope.thermometerForm.$setPristine();
+                $scope.thermometer = {};
+            });
+        };
         $rootScope.$on("updateAddresses", function () {
             $scope.response = ThermometerFactory.getTwiAddresses();
             $scope.thermometers = ThermometerFactory.getThermometers();
         });
-        ;
+
     }]);
 
 app.controller('DescriptionController', function ($scope, ThermometerFactory, $rootScope) {

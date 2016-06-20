@@ -1,9 +1,8 @@
-@import
-	url(http://fonts.googleapis.com/css?family=Covered+By+Your+Grace);
+@import url(http://fonts.googleapis.com/css?family=Covered+By+Your+Grace);
 
 #chartdiv {
-	height: 500px;
-	color: white;
-	padding: 0px 30px;
+    height: 500px;
+    color: white;
+    padding: 0px 30px;
 }
 

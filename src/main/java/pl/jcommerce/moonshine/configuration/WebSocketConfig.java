@@ -11,13 +11,13 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 @EnableWebSocketMessageBroker
 @EnableScheduling
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
-	
-	@Override
-	public void configureMessageBroker(MessageBrokerRegistry config) {
-	}
-	
-	@Override
-	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/hello").withSockJS();
-	}
+
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry config) {
+    }
+
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/hello").withSockJS();
+    }
 }

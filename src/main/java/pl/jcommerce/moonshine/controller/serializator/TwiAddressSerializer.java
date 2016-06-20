@@ -13,24 +13,24 @@ import java.util.stream.Collectors;
 
 /**
  * Used for serialization {@code TwiAddress} when obtained from view.
- * 
+ *
  * @return TwiAddress
  */
 public class TwiAddressSerializer extends JsonSerializer<TwiAddress> {
 
-	public void serialize(TwiAddress value, JsonGenerator gen, SerializerProvider serializers)
-			throws IOException, JsonProcessingException {
+    public void serialize(TwiAddress value, JsonGenerator gen, SerializerProvider serializers)
+            throws IOException, JsonProcessingException {
 
-		gen.writeStartObject();
-		gen.writeFieldName("physicalAddress");
+        gen.writeStartObject();
+        gen.writeFieldName("physicalAddress");
 
-		String serialized = Arrays.asList(value.getPhysicalAddress()).stream()
-				.map(b -> String.format(Locale.US, "%02x", b))
-				.collect(Collectors.joining(":"));
+        String serialized = Arrays.asList(value.getPhysicalAddress()).stream()
+                .map(b -> String.format(Locale.US, "%02x", b))
+                .collect(Collectors.joining(":"));
 
-		gen.writeString(serialized);
-		gen.writeEndObject();
+        gen.writeString(serialized);
+        gen.writeEndObject();
 
-	}
+    }
 
 }

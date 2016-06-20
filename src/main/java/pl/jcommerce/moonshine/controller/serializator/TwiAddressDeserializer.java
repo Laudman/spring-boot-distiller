@@ -13,23 +13,23 @@ import java.util.Arrays;
 
 /**
  * Used for deserialization {@code TwiAddress} when sending it to view.
- * 
+ *
  * @author wipo
  */
 public class TwiAddressDeserializer extends JsonDeserializer<TwiAddress> {
 
-	@Override
-	public TwiAddress deserialize(JsonParser p, DeserializationContext ctxt)
-			throws IOException, JsonProcessingException {
+    @Override
+    public TwiAddress deserialize(JsonParser p, DeserializationContext ctxt)
+            throws IOException, JsonProcessingException {
 
-		ObjectCodec oc = p.getCodec();
-		JsonNode node = oc.readTree(p);
+        ObjectCodec oc = p.getCodec();
+        JsonNode node = oc.readTree(p);
 
-		Byte[] aaa = Arrays.stream(node.asText().split(":"))
-				.map(var -> Byte.parseByte(var, 16))
-				.toArray(size -> new Byte[size]);
+        Byte[] aaa = Arrays.stream(node.asText().split(":"))
+                .map(var -> Byte.parseByte(var, 16))
+                .toArray(size -> new Byte[size]);
 
-		return new TwiAddress(aaa);
-	}
+        return new TwiAddress(aaa);
+    }
 
 }
